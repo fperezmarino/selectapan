@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+  <record id="student_1" model="school.student">
+    <field name="first_name">Abigail</field>
+    <field name="last_name">Chase</field>
+    <field name="family_ids" eval="[(Command.link(ref('edoob.family_1')))]"/>
+    <field name="gender" ref="edoob.gender_female"/>
+    <field name="enrollment_state_ids" eval="[Command.create({
+      'school_id': ref('edoob.my_school'),
+      'program_id': ref('edoob.my_program'),
+      'grade_level_id': ref('edoob.my_grade_level'),
+      'enrolled_date': datetime.today() - relativedelta(days=1),
+      'enrollment_status_id': ref('edoob.enrollment_status_enrolled'),
+    })]"/>
+  </record>
+
+  <record id="student_2" model="school.student">
+    <field name="first_name">Ashley</field>
+    <field name="last_name">Armes</field>
+    <field name="family_ids" eval="[(Command.link(ref('edoob.family_2')))]"/>
+    <field name="gender" ref="edoob.gender_female"/>
+    <field name="enrollment_state_ids" eval="[Command.create({
+      'school_id': ref('edoob.my_school'),
+      'program_id': ref('edoob.my_program'),
+      'grade_level_id': ref('edoob.my_grade_level'),
+      'enrolled_date': datetime.today() - relativedelta(days=1),
+      'enrollment_status_id': ref('edoob.enrollment_status_enrolled'),
+    })]"/>
+  </record>
+
+  <record id="student_3" model="school.student">
+    <field name="first_name">Gina</field>
+    <field name="last_name">Armes</field>
+    <field name="family_ids" eval="[(Command.link(ref('edoob.family_2')))]"/>
+    <field name="gender" ref="edoob.gender_female"/>
+    <field name="enrollment_state_ids" eval="[Command.create({
+      'school_id': ref('edoob.my_school'),
+      'program_id': ref('edoob.my_program'),
+      'grade_level_id': ref('edoob.my_grade_level'),
+      'enrolled_date': datetime.today() - relativedelta(days=1),
+      'enrollment_status_id': ref('edoob.enrollment_status_enrolled'),
+    })]"/>
+  </record>
+
+</odoo>

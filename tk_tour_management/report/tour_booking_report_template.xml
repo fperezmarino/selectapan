@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="tour_booking_qweb_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2>
+                                <span>
+                                    <strong>
+                                        Booking Details -
+                                        <span t-field="o.book_seq"/>
+                                    </strong>
+                                </span>
+                            </h2>
+                            <table class="table table-bordered border-primary"
+                                   style="font-size:15px;margin-bottom: 0px;">
+                                <tbody>
+                                    <tr>
+                                        <td style="background-color:#BEE7DA;">
+                                            <strong>
+                                                Name
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.customer_id"/>
+                                        </td>
+                                        <td style="background-color:#BEE7DA;">
+                                            <strong>
+                                                Tour Start
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.start_datetime"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="background-color:#BEE7DA;">
+                                            <strong>
+                                                Package
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.package_id"/>
+                                        </td>
+                                        <td style="background-color:#BEE7DA;">
+                                            <strong>
+                                                Tour End
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.end_datetime"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="background-color:#BEE7DA;">
+                                            <strong>
+                                                No. of Peoples
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.no_of_people"/>
+                                        </td>
+                                        <td style="background-color:#BEE7DA;">
+                                            <strong>
+                                                Booking Time
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.booking_time"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="background-color:#BEE7DA;">
+                                            <strong>
+                                                Any Child
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            <t t-if="o.is_any_child == True">
+                                                <span>
+                                                    <span t-field="o.no_of_child"/>
+                                                    Child
+                                                    <br/>
+                                                    Charge :
+                                                    <span t-field="o.child_cost"/>
+                                                    Charge/Child
+                                                </span>
+                                            </t>
+                                            <t t-else="">
+                                                No
+                                            </t>
+                                        </td>
+                                        <td style="background-color:#BEE7DA;">
+                                            <strong>
+                                                Discount
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            <t t-if="o.discount== 'fix'">
+                                                Fix Price
+                                            </t>
+                                            <t t-else="">
+                                                <span>
+                                                    <span t-field="o.discount_percentage"/>%
+                                                </span>
+                                            </t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="background-color:#30c381;">
+                                            <strong>
+                                                Payable Amount
+                                            </strong>
+                                        </td>
+                                        <td style="background-color:#30c381;">
+                                            <span t-field="o.final_cost"/>
+                                        </td>
+                                        <td style="background-color:#BEE7DA;">
+                                            <strong>
+                                                Invoice
+                                            </strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="o.invoice_id"/>
+                                        </td>
+                                    </tr>
+                                    <t t-if="o.driver_name">
+                                        <tr class="border border-dark">
+                                            <td colspan="4">
+                                                <h4>
+                                                    <strong>
+                                                        Transportation
+                                                    </strong>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color:#BEE7DA;">
+                                                <strong>
+                                                    Driver Name
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.driver_name"/>
+                                            </td>
+                                            <td style="background-color:#BEE7DA;">
+                                                <strong>
+                                                    Vehicle No.
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.vehicle_no"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color:#BEE7DA;">
+                                                <strong>
+                                                    Phone No.
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.driver_phone_no"/>
+                                            </td>
+                                            <td style="background-color:#BEE7DA;">
+                                                <strong>
+                                                    Vehicle Model
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.vehicle_model"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                    <t t-if="o.preference_ids">
+                                        <tr class="border border-dark">
+                                            <td colspan="4">
+                                                <h4>
+                                                    <strong>
+                                                        Preferences
+                                                    </strong>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color:#B8DECB;">
+                                            <td>
+                                                <strong>
+                                                    Category
+                                                </strong>
+                                            </td>
+                                            <td colspan="2">
+                                                <strong>
+                                                    Description
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                <strong>
+                                                    Cost
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                        <t t-foreach="o.preference_ids" t-as="i">
+                                            <tr>
+                                                <td>
+                                                    <span t-field="i.category"/>
+                                                </td>
+                                                <td colspan="2">
+                                                    <span t-field="i.title"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="i.charge"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <t t-if="o.flight_ids">
+                                        <tr class="border border-dark">
+                                            <td colspan="4">
+                                                <h4>
+                                                    <strong>
+                                                        Flight Details
+                                                    </strong>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color:#BEE7DA;">
+                                                <strong>
+                                                    Takeoff Time
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.flight_start"/>
+                                            </td>
+                                            <td style="background-color:#BEE7DA;">
+                                                <strong>
+                                                    Landing Time
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.flight_end"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color:#BEE7DA;">
+                                                <strong>
+                                                    Source Location
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.source_location"/>
+                                            </td>
+                                            <td style="background-color:#BEE7DA;">
+                                                Destination Location
+                                            </td>
+                                            <td>
+                                                <span t-field="o.destination_location"/>
+                                            </td>
+                                        </tr>
+                                        <tr style="background-color:#B8DECB;">
+                                            <td colspan="2">
+                                                <strong>
+                                                    Name
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                <strong>
+                                                    PNR No.
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                <strong>
+                                                    Price
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                        <t t-foreach="o.flight_ids" t-as="i">
+                                            <tr>
+                                                <td colspan="2">
+                                                    <span t-field="i.name"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="i.pnr"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="i.price"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <t t-if="o.insurance_number">
+                                        <tr class="border border-dark">
+                                            <td colspan="4">
+                                                <h4>
+                                                    <strong>
+                                                        Insurance &amp; Policy
+                                                    </strong>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color:#BEE7DA;">
+                                                <strong>
+                                                    Insurance No.
+                                                </strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="o.insurance_number"/>
+                                            </td>
+                                            <td style="background-color:#BEE7DA;">
+                                                Cost
+                                            </td>
+                                            <td>
+                                                <span t-field="o.insurance_price"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color:#BEE7DA;">
+                                                <strong>
+                                                    Description
+                                                </strong>
+                                            </td>
+                                            <td colspan="3">
+                                                <span t-field="o.insurance_description"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="background-color:#BEE7DA;">
+                                                <strong>
+                                                    Term &amp; Condition
+                                                </strong>
+                                            </td>
+                                            <td colspan="3">
+                                                <span t-field="o.insurance_term"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <p style="page-break-after:always;"/>
+                            <br/>
+                            <t t-set="doc" t-value="o.package_id"/>
+                            <t t-call="tk_tour_management.tour_package_template"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <record id="tour_booking_report_id" model="ir.actions.report">
+            <field name="name">Print Booking Details</field>
+            <field name="model">tour.booking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tk_tour_management.tour_booking_qweb_report_template</field>
+            <field name="report_file">tk_tour_management.tour_booking_qweb_report_template</field>
+            <field name="binding_model_id" ref="model_tour_booking"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">'%s Booking Details' %(object.book_seq)</field>
+        </record>
+    </data>
+</odoo>

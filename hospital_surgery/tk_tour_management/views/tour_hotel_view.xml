@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tour_hotel_form_view" model="ir.ui.view">
+            <field name="name">tour.hotel.form.view</field>
+            <field name="model">tour.hotel</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title float-left">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" required="1" placeholder="Title"/>
+                            </h1>
+                            <h5>
+                                <field name="location_id" required="1"/>
+                            </h5>
+                        </div>
+                        <div style="width:40%;height:40%;" class="float-right">
+                            <field name="image" style="width:40%;height:40%;" class="img-thumbnail float-right"
+                                   widget="image"/>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="phone" required="1"/>
+                                <field name="website"/>
+                                <field name="place_id" required="1"/>
+                            </group>
+                            <group>
+                                <span class="o_form_label o_td_label" name="address_name">
+                                    <b>Address</b>
+                                </span>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                    <field name="city" placeholder="City" class="o_address_city"/>
+                                    <field name="state_id" class="o_address_state" placeholder="State"
+                                           options="{'no_open': True, 'no_quick_create': True}"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country"
+                                           options="{'no_open': True, 'no_quick_create': True}"/>
+                                </div>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="star"/>
+                                <field name="facilities_ids" widget="many2many_tags"
+                                       options="{'color_field': 'color','no_open':True,'no_create':True}"/>
+                            </group>
+                            <group>
+                                <field name="check_in" widget="float_time" help="Time in 24 Hours"/>
+                                <field name="check_out" widget="float_time" help="Time in 24 Hours"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Galleries">
+                                <field name="image_ids">
+                                    <form>
+                                        <div class="oe_title float-left">
+                                            <label for="title"/>
+                                            <h1>
+                                                <field name="title" required="1"/>
+                                            </h1>
+                                        </div>
+                                        <div style="width:40%;height:40%;" class="float-right">
+                                            <field name="image" style="width:40%;height:40%;"
+                                                   class="img-thumbnail float-right"
+                                                   widget="image" required="1"/>
+                                        </div>
+                                    </form>
+                                    <kanban>
+                                        <field name="id"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div class="oe_kanban_global_click border-0" style="width:200px">
+                                                    <span>
+                                                        <strong>
+                                                            <field name="title" required="1"/>
+                                                        </strong>
+                                                    </span>
+                                                    <img alt="Avtar"
+                                                         t-att-src="kanban_image('location.images','image',record.id.raw_value)"
+                                                         style="width:200px;height:200px;"
+                                                         class="img-thumbnail"/>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+                            <page string="Room">
+                                <field name="room_ids">
+                                    <form>
+                                        <div class="oe_title float-left">
+                                            <label for="room_type_id"/>
+                                            <h1>
+                                                <field name="room_type_id" required="1"/>
+                                            </h1>
+                                            <h5>
+                                                <field name="company_id" invisible="1"/>
+                                                <field name="currency_id" invisible="1"/>
+                                                <field name="price" required="1" widget="monetary"/>
+                                            </h5>
+                                        </div>
+                                        <div style="width:40%;height:40%;" class="float-right">
+                                            <field name="cover_image" style="width:40%;height:40%;"
+                                                   class="img-thumbnail float-right"
+                                                   widget="image" required="1"/>
+                                        </div>
+                                        <field name="image_ids">
+                                            <form>
+                                                <field name="image" widget="image"/>
+                                            </form>
+                                            <kanban>
+                                                <field name="id"/>
+                                                <templates>
+                                                    <t t-name="kanban-box">
+                                                        <div class="oe_kanban_global_click border-0"
+                                                             style="width:200px">
+                                                            <img alt="Avtar"
+                                                                 t-att-src="kanban_image('room.image','image',record.id.raw_value)"
+                                                                 style="width:200px;height:200px;"
+                                                                 class="img-thumbnail"/>
+                                                        </div>
+                                                    </t>
+                                                </templates>
+                                            </kanban>
+                                        </field>
+                                    </form>
+                                    <kanban class="'o_res_partner_kanban">
+                                        <field name="id"/>
+                                        <field name="image_ids"/>
+                                        <field name="company_id" invisible="1"/>
+                                        <field name="currency_id" invisible="1"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div class="oe_kanban_global_click"
+                                                     style="width:350px;height: 415px;background-color: white;margin:0 0.5rem;transition: 0.3s;padding:0!important;">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div style="width:100%;height:100%;">
+                                                                <img alt="Avtar"
+                                                                     t-att-src="kanban_image('hotel.room','cover_image',record.id.raw_value)"
+                                                                     style="height: 300px;width: 100%;"
+                                                                     class="float-left"/>&#160;&#160;&#160;
+                                                            </div>
+                                                            <strong style="padding-right: 12px;width:auto;height: 30px;background-color: #FF9A8B;background-image: linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);color: #212529;position: relative;top: -49px;padding-left: 10px;font-size: 20px;">
+                                                                <field name="room_type_id"/>&#160;&#160;&#160;
+                                                                <field name="price" widget="monetary"/>
+                                                            </strong>
+                                                            <t t-set="end" t-value="1"/>
+                                                            <div class="abc" style="position: relative;top: -49px;">
+                                                                <t t-foreach="record.image_ids.raw_value" t-as="o">
+                                                                    <img alt="Avtar"
+                                                                         t-if="end &lt;= 3"
+                                                                         t-attf-src="/web/image/room.image/{{ o }}/image/"
+                                                                         style="width:115.66px;height:113px;"
+                                                                         class="img-rounded border"/>
+                                                                    <t t-set="end" t-value="end + 1"/>
+                                                                </t>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+                            <page string="Meals">
+                                <field name="meal_ids">
+                                    <tree editable="top">
+                                        <field name="type"/>
+                                        <field name="food"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="tour_hotel_tree_view" model="ir.ui.view">
+            <field name="name">tour.hotel.tree.view</field>
+            <field name="model">tour.hotel</field>
+            <field name="arch" type="xml">
+                <tree string="Hotel">
+                    <field name="name"/>
+                    <field name="location_id"/>
+                    <field name="place_id"/>
+                    <field name="phone"/>
+                    <field name="website"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tour_hotel_search_view" model="ir.ui.view">
+            <field name="name">tour.hotel.search.view</field>
+            <field name="model">tour.hotel</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="location_id"/>
+                    <field name="place_id"/>
+                    <field name="phone"/>
+                    <field name="website"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="tour_hotel_action" model="ir.actions.act_window">
+            <field name="name">Hotel</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tour.hotel</field>
+            <field name="view_mode">tree,form,search</field>
+        </record>
+    </data>
+</odoo>

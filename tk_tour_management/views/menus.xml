@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--Main Menu-->
+    <menuitem id="main_menu_tour_management"
+              name="Tour Management"
+              web_icon="tk_tour_management,static/description/icon.png"/>
+
+    <!--Dashboard Menu-->
+    <menuitem id="menu_tour_dashboard"
+              name="Statistics"
+              sequence="0"
+              action="action_tour_dashboard"
+              parent="main_menu_tour_management"/>
+
+    <menuitem name="Bookings"
+              id="menu_tour_booking"
+              parent="main_menu_tour_management"
+              action="tour_booking_action"
+              sequence="1"/>
+    <menuitem name="Customers"
+              id="menu_customer"
+              parent="main_menu_tour_management"
+              action="contacts.action_contacts"
+              sequence="2"/>
+
+    <menuitem name="Inquiry"
+              id="menu_inquiry"
+              parent="main_menu_tour_management"
+              sequence="3"/>
+    <menuitem name="Inquiry"
+              id="menu_inquiry_inquiry"
+              parent="menu_inquiry"
+              action="crm.crm_lead_all_leads"
+              sequence="1"/>
+    <menuitem name="Inquiry Pipeline"
+              id="menu_inquiry_pipeline"
+              parent="menu_inquiry"
+              action="tour_inquiry_pipline_action"
+              sequence="2"/>
+
+    <menuitem name="Packages"
+              id="menu_tour_package"
+              parent="main_menu_tour_management"
+              action="tour_package_action"
+              sequence="4"/>
+    <menuitem name="Hotels"
+              id="menu_tour_hotel"
+              parent="main_menu_tour_management"
+              action="tour_hotel_action"
+              sequence="5"/>
+
+    <menuitem name="Locations"
+              id="menu_tour_location"
+              parent="main_menu_tour_management"
+              sequence="6"/>
+    <menuitem name="Locations"
+              id="menu_tour_location_location"
+              parent="menu_tour_location"
+              action="tour_location_action"
+              sequence="1"/>
+    <menuitem name="Places"
+              id="menu_tour_place"
+              parent="menu_tour_location"
+              action="tour_place_action"
+              sequence="2"/>
+
+    <menuitem name="Configurations"
+              id="menu_configuration"
+              parent="main_menu_tour_management"/>
+    <menuitem name="Room Type"
+              id="menu_room_type"
+              parent="menu_configuration"
+              action="room_type_action"/>
+    <menuitem name="Employee"
+              id="menu_employee"
+              parent="menu_configuration"
+              action="hr.open_view_employee_list_my"/>
+    <menuitem name="Hotel Facilities"
+              id="menu_hotel_facilities"
+              parent="menu_configuration"
+              action="hotel_facilities_actions"/>
+    <menuitem name="Package Days"
+              id="menu_package_days"
+              parent="menu_configuration"
+              action="package_days_actions"/>
+    <menuitem name="Package Facilities"
+              id="menu_package_facilities"
+              parent="menu_configuration"
+              action="package_facilities_action"/>
+    <menuitem name="Document List"
+              id="menu_document_list"
+              parent="menu_configuration"
+              action="document_list_action"/>
+
+</odoo>

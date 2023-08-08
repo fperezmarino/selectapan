@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+        <!-- La vista hereda del formulario existente del modelo de producto -->
+        <record model="ir.ui.view" id="product_template_form_inherited">
+            <field name="name">product.template.form.inherited</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <!-- Agregamos el campo dollar_price encima del campo list_price -->
+                <xpath expr="//field[@name='list_price']" position="before">
+                </xpath>
+            </field>
+        </record>
+        
+
+
+<!-- 
+         <record id="action_pos_sale_graph" model="ir.actions.act_window">
+            <field name="name">Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pos.order</field>
+            <field name="view_mode">graph,tree,form,kanban,pivot</field>
+            <field name="domain">[('state', 'not in', ['draft', 'cancel', 'invoiced'])]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No data yet!
+                </p><p>
+                    Create a new POS order
+                </p>
+            </field>
+        </record> -->
+    </data>
+</odoo>

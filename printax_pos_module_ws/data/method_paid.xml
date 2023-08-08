@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--Payment Product-->
+    <data noupdate="1">
+        <record id="PM_1" model="pos.payment.method">
+            <field name="name">Pago movil</field>
+            <field name="printax_code">3</field>
+            
+        </record>
+        <record id="Dollar_1" model="pos.payment.method">
+            <field name="name">Dollar</field>
+            <field name="printax_code">4</field>
+           
+        </record>
+    </data>
+</odoo>

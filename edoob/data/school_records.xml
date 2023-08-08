@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+  <record id="my_district" model="school.district">
+    <field name="name">My District</field>
+    <field name="code">MY-DTRCT</field>
+  </record>
+
+  <record id="my_school" model="school.school">
+    <field name="name">My School</field>
+    <field name="code">MY-SCHL</field>
+    <field name="district_id" ref="my_district"/>
+  </record>
+
+  <record id="my_program" model="school.program">
+    <field name="name">My Program</field>
+    <field name="code">MY-PRGM</field>
+    <field name="school_id" ref="my_school"/>
+  </record>
+
+  <record id="my_year_category" model="school.period.category">
+    <field name="name">Year</field>
+  </record>
+
+  <record id="my_period" model="school.period">
+    <field name="name">My Period</field>
+    <field name="program_id" ref="my_program"/>
+    <field name="category_id" ref="my_year_category"/>
+  </record>
+
+  <record id="my_grade_level" model="school.grade.level">
+    <field name="name">My Grade Level</field>
+    <field name="program_id" ref="my_program"/>
+  </record>
+
+  <!-- Relationship types -->
+  <record id="relationship_parent" model="school.student.relationship.type">
+    <field name="name">Parent</field>
+    <field name="type">parent</field>
+    <field name="key">parent</field>
+    <field name="sequence">1</field>
+  </record>
+
+  <record id="relationship_father" model="school.student.relationship.type">
+    <field name="name">Father</field>
+    <field name="type">father</field>
+    <field name="key">father</field>
+    <field name="sequence">2</field>
+  </record>
+
+  <record id="relationship_mother" model="school.student.relationship.type">
+    <field name="name">Mother</field>
+    <field name="type">mother</field>
+    <field name="key">mother</field>
+    <field name="sequence">3</field>
+  </record>
+
+  <record id="relationship_daughter" model="school.student.relationship.type">
+    <field name="name">Daughter</field>
+    <field name="type">daughter</field>
+    <field name="key">daughter</field>
+    <field name="sequence">4</field>
+  </record>
+
+  <record id="relationship_son" model="school.student.relationship.type">
+    <field name="name">Son</field>
+    <field name="type">son</field>
+    <field name="key">son</field>
+    <field name="sequence">5</field>
+  </record>
+
+  <record id="relationship_child" model="school.student.relationship.type">
+    <field name="name">Child</field>
+    <field name="type">child</field>
+    <field name="key">child</field>
+    <field name="sequence">6</field>
+  </record>
+
+  <record id="relationship_sibling" model="school.student.relationship.type">
+    <field name="name">Sibling</field>
+    <field name="type">sibling</field>
+    <field name="key">sibling</field>
+    <field name="sequence">7</field>
+  </record>
+
+  <record id="relationship_brother" model="school.student.relationship.type">
+    <field name="name">Brother</field>
+    <field name="type">brother</field>
+    <field name="key">brother</field>
+    <field name="sequence">8</field>
+  </record>
+
+  <record id="relationship_sister" model="school.student.relationship.type">
+    <field name="name">Sister</field>
+    <field name="type">sister</field>
+    <field name="key">sister</field>
+    <field name="sequence">9</field>
+  </record>
+
+  <record id="relationship_grandparent" model="school.student.relationship.type">
+    <field name="name">Grandparent</field>
+    <field name="type">grandparent</field>
+    <field name="key">grandparent</field>
+    <field name="sequence">10</field>
+  </record>
+
+  <record id="relationship_grandfather" model="school.student.relationship.type">
+    <field name="name">Grandfather</field>
+    <field name="type">grandfather</field>
+    <field name="key">grandfather</field>
+    <field name="sequence">11</field>
+  </record>
+
+  <record id="relationship_grandmother" model="school.student.relationship.type">
+    <field name="name">Grandmother</field>
+    <field name="type">grandmother</field>
+    <field name="key">grandmother</field>
+    <field name="sequence">12</field>
+  </record>
+
+  <record id="relationship_stepparent" model="school.student.relationship.type">
+    <field name="name">Stepparent</field>
+    <field name="type">stepparent</field>
+    <field name="key">stepparent</field>
+    <field name="sequence">13</field>
+  </record>
+
+  <record id="relationship_stepfather" model="school.student.relationship.type">
+    <field name="name">Stepfather</field>
+    <field name="type">stepfather</field>
+    <field name="key">stepfather</field>
+    <field name="sequence">14</field>
+  </record>
+
+  <record id="relationship_stepmother" model="school.student.relationship.type">
+    <field name="name">Stepmother</field>
+    <field name="type">stepmother</field>
+    <field name="key">stepmother</field>
+    <field name="sequence">15</field>
+  </record>
+
+  <record id="relationship_stepsibling" model="school.student.relationship.type">
+    <field name="name">Stepsibling</field>
+    <field name="type">stepsibling</field>
+    <field name="key">stepsibling</field>
+    <field name="sequence">16</field>
+  </record>
+
+  <record id="relationship_stepbrother" model="school.student.relationship.type">
+    <field name="name">Stepbrother</field>
+    <field name="type">stepbrother</field>
+    <field name="key">stepbrother</field>
+    <field name="sequence">17</field>
+  </record>
+
+  <record id="relationship_stepsister" model="school.student.relationship.type">
+    <field name="name">Stepsister</field>
+    <field name="type">stepsister</field>
+    <field name="key">stepsister</field>
+    <field name="sequence">18</field>
+  </record>
+
+  <record id="relationship_cousin" model="school.student.relationship.type">
+    <field name="name">Cousin</field>
+    <field name="type">cousin</field>
+    <field name="key">cousin</field>
+    <field name="sequence">19</field>
+  </record>
+
+  <record id="relationship_uncle" model="school.student.relationship.type">
+    <field name="name">Uncle</field>
+    <field name="type">uncle</field>
+    <field name="key">uncle</field>
+    <field name="sequence">20</field>
+  </record>
+
+  <record id="relationship_other" model="school.student.relationship.type">
+    <field name="name">Other</field>
+    <field name="type">other</field>
+    <field name="key">other</field>
+    <field name="sequence">21</field>
+  </record>
+
+</odoo>

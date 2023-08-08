@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tour_inquire_inherit_form_view" model="ir.ui.view">
+            <field name="name">tour.inquire.inherit.form.view</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header" position="inside">
+                    <button name="%(customer_booking_inquiry_wizard_action)d"
+                            type='action'
+                            string="Book"
+                            class="btn btn-outline-dark"
+                            attrs="{'invisible':[('type', '!=', 'opportunity')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="package_id" attrs="{'invisible':[('type', '=', 'opportunity')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="booking_id" readonly="1"
+                           attrs="{'invisible':['|',('booking_id','=',False),('type', '=', 'lead')]}"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="tour_inquiry_pipline_action" model="ir.actions.act_window">
+            <field name="name">Pipline</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">crm.lead</field>
+            <field name="domain">[('type','=','opportunity')]</field>
+            <field name="context">{'default_type':'opportunity'}</field>
+            <field name="view_mode">tree,form,kanban,activity</field>
+        </record>
+    </data>
+</odoo>

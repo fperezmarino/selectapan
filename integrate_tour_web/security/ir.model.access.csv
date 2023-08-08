@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+
+
+access_tour_package_tour_package,Access Tour Package,model_tour_package,base.group_portal,1,1,1,1

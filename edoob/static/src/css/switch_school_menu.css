@@ -1,0 +1,73 @@
+.o_main_navbar .o_switch_school_menu {
+  /*
+  This submenu code was taken from https://www.codeply.com/go/bp/92442
+  This has some modifications to show the submenu when the cursor is hover
+  */
+}
+.o_main_navbar .o_switch_school_menu .dropdown-menu.show {
+  overflow: unset;
+}
+.o_main_navbar .o_switch_school_menu .dropdown-submenu {
+  position: relative;
+  width: 100%;
+  padding: 0.25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #666666;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.o_main_navbar .o_switch_school_menu .dropdown-submenu > .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  -webkit-border-radius: 0 6px 6px 6px;
+  -moz-border-radius: 0 6px 6px 6px;
+  border-radius: 0 6px 6px 6px;
+  position: absolute;
+}
+.o_main_navbar .o_switch_school_menu .dropdown-submenu > .log_into:after {
+  display: flex;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #707070;
+  margin-top: 5px;
+  margin-right: 10px;
+}
+.o_main_navbar .o_switch_school_menu .dropdown-submenu:hover > .dropdown-menu {
+  display: block;
+}
+.o_main_navbar .o_switch_school_menu .dropdown-submenu:hover > .log_into:after {
+  border-left-color: #969696;
+}
+.o_main_navbar .o_switch_school_menu .dropdown-submenu > .pull-left {
+  float: none;
+}
+.o_main_navbar .o_switch_school_menu .dropdown-submenu > .pull-left > .dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  -webkit-border-radius: 6px 0 6px 6px;
+  -moz-border-radius: 6px 0 6px 6px;
+  border-radius: 6px 0 6px 6px;
+}
+.o_main_navbar .o_switch_school_menu .dropdown-submenu:hover {
+  background-color: white;
+}
+.o_main_navbar .o_switch_school_menu .dropdown-submenu .o_py {
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.2rem !important;
+}
+.o_main_navbar .o_switch_school_menu .dropdown-submenu .o_py:hover {
+  background-color: #e9ecef !important;
+}
+
+/*# sourceMappingURL=switch_school_menu.css.map */

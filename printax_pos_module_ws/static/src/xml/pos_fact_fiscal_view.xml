@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+
+
+
+    <t t-inherit="point_of_sale.ProductItem" t-inherit-mode="extension">
+	<xpath expr="article" position="replace">
+        <article class="product" tabindex="0" t-on-keypress="spaceClickProduct"
+				t-on-click="onProductClick()"
+                 t-att-data-product-id="props.product.id"
+                 t-attf-aria-labelledby="article_product_{{props.product.id}}">
+            <div class="product-img">
+                <i role="img" aria-label="Info" title="Info" class="product-info-button fa fa-info-circle"
+                    t-on-click.stop="onProductInfoClick()"
+                />
+                <img t-att-src="imageUrl" t-att-alt="props.product.display_name" />
+                <span class="price-tag">
+                    <t t-esc="price" />
+                </span>
+            </div>
+            <div class="product-name" t-attf-id="article_product_{{props.product.id}}">
+                <t t-esc="props.product.display_name" />
+            </div>
+        </article>
+		
+		
+		</xpath>
+		
+    </t>
+
+	
+
+
+	<t t-inherit="point_of_sale.ReceiptScreen" t-inherit-mode="extension">
+		<xpath expr="//div[hasclass('buttons')]" position="replace">
+			<div>
+				<div class="buttons">
+					<div id="btmdrawer" class="button highlight" t-on-click="clickopen" >
+						<i class="fa fa-archive" /> Abrir Gaveta
+					</div>
+				</div>
+			</div>
+		
+		
+			<div>
+				<div class="buttons">
+					<div id="btmFactFiscal" class="button js_invoice" t-on-click="OnPrintFactFiscal">
+						<i class="fa fa-print" /> Factura fiscal
+					</div>
+				</div>
+			</div>
+		</xpath>
+	</t>
+
+
+
+	<t t-inherit="point_of_sale.PaymentScreenStatus" t-inherit-mode="extension">
+		
+		<xpath expr="//div[hasclass('payment-status-change')]" position="after">
+			<t t-set="is_efectivo_shown" t-value="True" />
+			<t t-foreach="props.paymentLines" t-as="line" t-key="line.cid">	
+				<t t-if="is_efectivo_shown === True" >
+				<div t-if="line.name === 'Dollar'" class="payment-status-total-due" >
+						<t t-set="is_efectivo_shown" t-value="False" />
+						<span class="label">IGTF 3%</span>
+						<span>
+							<t t-esc="igtfText" />
+						</span>
+					</div>
+				</t>
+			</t>
+			
+		</xpath>
+	</t>
+	<!-- payment-controls -->
+    <t t-inherit="point_of_sale.ReprintReceiptScreen" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('centered-content')]" position="replace">
+            <div class="centered-content">
+                    <div class="button print" t-on-click="tryReprinttu" t-att-data-order-id="props.order.uid">
+                        <i class="fa fa-print"></i> Imprimir Factura
+                    </div>
+                    <div class="pos-receipt-container">
+                        <OrderReceipt order="props.order" t-ref="order-receipt" />
+                    </div>
+                </div>
+        </xpath>
+        
+    </t>
+</templates>
+
+<!-- <t t-name="PaymentScreenStatus" owl="1">
+    <div t-if="props.paymentLines.length === 0" class="paymentlines-empty">
+        <div class="total">
+            <t t-esc="totalDueText" />
+        </div>
+        <div class="message">
+            Please select a payment method.
+        </div>
+    </div>
+
+    <div t-else="">
+        <div class="payment-status-container">
+            <div>
+                <div class="payment-status-remaining">
+                    <span class="label">Remaining</span>
+                    <span class="amount"
+                          t-att-class="{ highlight: currentOrder.get_due() > 0 }">
+                        <t t-esc="remainingText" />
+                    </span>
+                </div>
+                <div class="payment-status-total-due">
+                    <span class="label">Total Due</span>
+                    <span>
+                        <t t-esc="totalDueText" />
+                    </span>
+                </div>
+            </div>
+            <div>
+                <div class="payment-status-change">
+                    <span class="label">Change</span>
+                    <span class="amount"
+                          t-att-class="{ highlight: currentOrder.get_change() > 0 }">
+                        <t t-esc="changeText" />
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+<!-- </t> -->
+

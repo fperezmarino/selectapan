@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <record id="enroll_student_form_individual_view_kanban" model="ir.ui.view">
+    <field name="name">enroll.student.form.individual.view.kanban</field>
+    <field name="model">enroll.student.form.individual</field>
+    <field name="arch" type="xml">
+      <kanban>
+        <field name="id"/>
+        <field name="name"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+              <field name="image_1920" widget="image" class="o_kanban_image_fill_left"
+                     options="{'zoom': true, 'zoom_delay': 1000, 'background': true, 'preventClicks': false}"/>
+              <div class="oe_kanban_details">
+                <div class="o_kanban_record_top">
+                  <div class="o_kanban_record_headings">
+                    <div class="o_kanban_record_title">
+                      <field name="name"/>
+                    </div>
+                  </div>
+                  <div class="o_dropdown_kanban dropdown">
+                    <a role="button" class="dropdown-toogle o-no-caret btn" data-toggle="dropdown" data-display="static"
+                       href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                      <span class="fa fa-ellipsis-v"/>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <record id="enroll_student_form_individual_view_form" model="ir.ui.view">
+    <field name="name">enroll.student.form.individual.view.form</field>
+    <field name="model">enroll.student.form.individual</field>
+    <field name="arch" type="xml">
+      <form>
+        <h1>
+          <field name="name" readonly="1" force_save="1"/>
+        </h1>
+        <field name="image_1920" widget='image' class="oe_avatar" options='{"preview_image": "avatar_128"}' />
+        <group>
+          <group name="group_left">
+            <field name="default_relationship_id" />
+            <field name="form_id" invisible="1" force_save="1"/>
+            <field name="first_name" />
+            <field name="middle_name" />
+            <field name="last_name" />
+            <field name="gender" required="1"/>
+            <field name="date_of_birth" required="1"/>
+          </group>
+          <group name="group_right">
+            <field name="email" widget="email" />
+            <field name="phone" widget="phone"/>
+            <span class="o_form_label o_td_label" name="address_name">
+              <b>Address</b>
+            </span>
+            <div class="o_address_format">
+              <field name="street" placeholder="Street..." class="o_address_street"/>
+              <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+              <field name="city" placeholder="City" class="o_address_city"/>
+              <field name="state_id" class="o_address_state" placeholder="State"
+                     options="{'no_open': True, 'no_quick_create': True}"
+                     context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+              <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+              <field name="country_id" placeholder="Country" class="o_address_country"
+                     options='{"no_open": True, "no_create": True}'/>
+            </div>
+            <field name="family_ids" widget="many2many_tags" invisible="1"/>
+          </group>
+        </group>
+      </form>
+    </field>
+  </record>
+
+</odoo>

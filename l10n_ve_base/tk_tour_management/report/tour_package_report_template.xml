@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="tour_package_template">
+            <center>
+                <h2>
+                    <span>
+                        <span t-field="doc.name"/>-
+                        <strong>
+                            <span t-field="doc.type"/>-
+                            <span t-field="doc.total_days"/>D<span t-field="doc.total_night"/>N
+                        </strong>
+                    </span>
+                </h2>
+                <h4>
+                    <span>|
+                        <t t-foreach="doc.location_ids" t-as="location">
+                            <t t-if="location.name">
+                                <span t-field="location.name"/>
+                            </t>
+                            |
+                        </t>
+                    </span>
+                </h4>
+            </center>
+            <br/>
+            <table class="table">
+                <t t-foreach="doc.days_ids" t-as="day">
+                    <tr>
+                        <td>
+                            <table class="table" style="font-size:12px;margin-bottom: 0px;">
+                                <tbody>
+                                    <tr class="table-info">
+                                        <td colspan="2">
+                                            <center>
+                                                <span>
+                                                    <h4>
+                                                        <strong>
+                                                            <span t-field="day.location_id"/>-
+                                                        </strong>
+                                                        <span t-field="day.day"/>
+                                                    </h4>
+                                                </span>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="day.activities_ids" t-as="act">
+                                        <t t-if="act.summary">
+                                            <tr>
+                                                <td>
+                                                    <span>
+                                                        <strong>
+                                                            Summary
+                                                        </strong>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span t-field="act.summary"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="act.type=='trip'">
+                                            <tr>
+                                                <td>
+                                                    <span>
+                                                        Trip
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        <strong>
+                                                            <span t-field="act.title"/>
+                                                        </strong>
+                                                        via
+                                                        <span t-field="act.transfer"/>
+                                                        |
+                                                        Distance
+                                                        <strong>
+                                                            <span t-field="act.distance"/>
+                                                        </strong>
+                                                        |
+                                                        Departing
+                                                        <strong>
+                                                            <span t-field="act.from_destination"/>
+                                                        </strong>
+                                                        at
+                                                        <span t-field="act.start"
+                                                              t-options="{'widget': 'float_time'}"/>
+                                                        to
+                                                        Arriving
+                                                        <strong>
+                                                            <span t-field="act.to_destination"/>
+                                                        </strong>
+                                                        at
+                                                        <span t-field="act.start"
+                                                              t-options="{'widget': 'float_time'}"/>
+                                                        |
+                                                        <span t-field="act.note"/>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <span>
+                                                        Hotel
+                                                    </span>
+                                                </td>
+                                                <td style="padding: 0px;">
+                                                    <table class="table table-bordered border-primary">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="padding:0px;width:50%">
+                                                                    <span>
+                                                                        <strong>
+                                                                            <span t-field="day.hotel_id"/>
+                                                                        </strong>
+                                                                        at
+                                                                        <strong>
+                                                                            <span t-field="day.location_id"/>
+                                                                        </strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td style="padding:0px;width:50%">
+                                                                    <strong>
+                                                                        Night
+                                                                    </strong>
+                                                                    <span t-field="day.night_stay"/>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding: 0px;width: 50%;">
+                                                                    Check in
+                                                                    <strong>
+                                                                        <span t-field="day.hotel_id.check_in"
+                                                                              t-options="{'widget': 'float_time'}"/>
+                                                                    </strong>
+                                                                </td>
+                                                                <td style="padding: 0px;width: 50%;">
+                                                                    Check Out
+                                                                    <strong>
+                                                                        <span t-field="day.hotel_id.check_out"
+                                                                              t-options="{'widget': 'float_time'}"/>
+                                                                    </strong>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="act.type=='sightseeing'">
+                                            <tr>
+                                                <td>
+                                                    <span>
+                                                        Sight Seeing
+                                                    </span>
+                                                </td>
+                                                <td style="padding: 0px;">
+                                                    <table class="table table-bordered border-primary">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="padding: 0px;width: 50%;">
+                                                                    <span>
+                                                                        Place :
+                                                                        <strong>
+                                                                            <span t-field="act.place_id"/>
+                                                                        </strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td style="padding: 0px;width: 50%;">
+                                                                    <span>
+                                                                        Sightseeing in
+                                                                        <strong>
+                                                                            <span t-field="act.title"/>
+                                                                        </strong>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding: 0px;width: 50%;">
+                                                                    <span>
+                                                                        Duration
+                                                                        <strong>
+                                                                            <span t-field="act.duration"/>
+                                                                        </strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td style="padding: 0px;width: 50%;">
+                                                                    <span>
+                                                                        Time
+                                                                        <strong>
+                                                                            <span t-field="act.time"/>
+                                                                        </strong>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding: 0px;width: 50%;">
+                                                                    <span>
+                                                                        Transfer Via
+                                                                        <strong>
+                                                                            <span t-field="act.transfer"/>
+                                                                        </strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td style="padding: 0px;width: 50%;">
+                                                                    <span>
+                                                                        Note
+                                                                        <strong>
+                                                                            <span t-field="act.note"/>
+                                                                        </strong>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <t t-if="act.type=='hangout'">
+                                            <tr>
+                                                <td>
+                                                    <span>
+                                                        Hangout
+                                                    </span>
+                                                </td>
+                                                <td style="padding: 0px;">
+                                                    <table class="table table-bordered border-primary">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="padding: 0px;width: 50%;">
+                                                                    <span>
+                                                                        Place :
+                                                                        <strong>
+                                                                            <span t-field="act.place_id"/>
+                                                                        </strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td style="padding: 0px;width: 50%;">
+                                                                    <span>
+                                                                        Hangout at
+                                                                        <strong>
+                                                                            <span t-field="act.title"/>
+                                                                        </strong>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding: 0px;width: 50%;">
+                                                                    <span>
+                                                                        Duration
+                                                                        <strong>
+                                                                            <span t-field="act.duration"/>
+                                                                        </strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td style="padding: 0px;width: 50%;">
+                                                                    <span>
+                                                                        Time
+                                                                        <strong>
+                                                                            <span t-field="act.time"/>
+                                                                        </strong>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding: 0px;width: 50%;">
+                                                                    <span>
+                                                                        Transfer Via
+                                                                        <strong>
+                                                                            <span t-field="act.transfer"/>
+                                                                        </strong>
+                                                                    </span>
+                                                                </td>
+                                                                <td style="padding: 0px;width: 50%;">
+                                                                    <span>
+                                                                        Note
+                                                                        <strong>
+                                                                            <span t-field="act.note"/>
+                                                                        </strong>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </t>
+            </table>
+            <p style="page-break-after:always;"/>
+            <br/>
+            <center>
+                <h5>Policy</h5>
+            </center>
+            <table class="table" style="font-size:12px;margin-bottom: 0px;">
+                <tbody>
+                    <tr>
+                        <td>
+                            <center>
+                                Cancellation
+                            </center>
+                        </td>
+                        <td>
+                            <center>Date Change</center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span t-field="doc.on_date_change"/>
+                        </td>
+                        <td>
+                            <span t-field="doc.on_date_change"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <center>
+                <h5>Inclusion &amp; Exclusion</h5>
+            </center>
+            <table class="table" style="font-size:12px;margin-bottom: 0px;">
+                <tbody>
+                    <tr>
+                        <td>
+                            <center>
+                                Inclusion
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                Exclusion
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span t-field="doc.inclusion"/>
+                        </td>
+                        <td>
+                            <span t-field="doc.exclusion"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <h2>
+                <spam>
+                    <center>
+                        Price :
+                        <span t-field="doc.price"/>
+                    </center>
+                </spam>
+            </h2>
+            <p style="page-break-after:always;"/>
+            <br/>
+            <center>
+                <h5>Notes</h5>
+            </center>
+            <table class="table" style="font-size:12px;margin-bottom: 0px;">
+                <tbody>
+                    <tr>
+                        <td>
+                            <center>Note</center>
+                        </td>
+                        <td>
+                            <center>Payment</center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span t-field="doc.note"/>
+                        </td>
+                        <td>
+                            <span t-field="doc.payment"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            <center>
+                <h5>Term &amp; Condition</h5>
+            </center>
+            <table class="table" style="font-size:12px;margin-bottom: 0px;">
+                <tbody>
+                    <tr>
+                        <td>
+                            <span t-field="doc.term_condition"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </template>
+        <template id="tour_package_qweb_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <t t-call="tk_tour_management.tour_package_template"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <record id="tour_package_report_id" model="ir.actions.report">
+            <field name="name">Print Package Details</field>
+            <field name="model">tour.package</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tk_tour_management.tour_package_qweb_report_template</field>
+            <field name="report_file">tk_tour_management.tour_package_qweb_report_template</field>
+            <field name="binding_model_id" ref="model_tour_package"/>
+            <field name="binding_type">report</field>
+            <field name="print_report_name">'%s Tour Package' %(object.name)</field>
+        </record>
+    </data>
+</odoo>

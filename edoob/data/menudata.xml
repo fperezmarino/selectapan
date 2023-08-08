@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+
+  <record model="ir.actions.act_window" id="action_school_settings_grades">
+    <field name="name">School grade levels</field>
+    <field name="res_model">school.grade.level</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_school_settings_codes">
+    <field name="name">School code</field>
+    <field name="res_model">school.school</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_school_settings_districts">
+    <field name="name">District codes</field>
+    <field name="res_model">school.district</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_school_settings_placement">
+    <field name="name">Placements</field>
+    <field name="res_model">school.placement</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_school_settings_withdraw_reason">
+    <field name="name">Withdraw Reasons</field>
+    <field name="res_model">school.withdraw_reason</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_school_settings_status">
+    <field name="name">Status</field>
+    <field name="res_model">school.enrollment.status</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_school_settings_sub_status">
+    <field name="name">Sub Status</field>
+    <field name="res_model">school.enrollment.sub.status</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_school_settings_healthcare_allergy">
+    <field name="name">Medical Allergies</field>
+    <field name="res_model">school.healthcare.allergy</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_school_settings_healthcare_condition">
+    <field name="name">Medical Condition</field>
+    <field name="res_model">school.healthcare.condition</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_school_settings_healthcare_medication">
+    <field name="name">Medications</field>
+    <field name="res_model">school.healthcare.medication</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_school_settings_relationship_type">
+    <field name="name">Relationship Types</field>
+    <field name="res_model">school.student.relationship.type</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_school_settings_relationship">
+    <field name="name">Relationships</field>
+    <field name="res_model">school.student.relationship</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_school_settings_marital_status">
+    <field name="name">Marital Status</field>
+    <field name="res_model">school.marital_status</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_school_settings_gender">
+    <field name="name">Gender</field>
+    <field name="res_model">school.gender</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_school_settings_grade_level_types">
+    <field name="name">Grade level types</field>
+    <field name="res_model">school.grade.level.type</field>
+    <field name="view_mode">tree</field>
+  </record>
+
+  <menuitem id="school_panel_menu" name="School Panel"
+    web_icon="edoob,static/description/icon.png"
+    groups="edoob.group_school_view_only"
+    />
+
+  <!-- Configuration -->
+  <menuitem id="school_configuration_menu" name="Configuration" parent="edoob.school_panel_menu" sequence="200"/>
+
+  <menuitem
+          name="Settings"
+          id="school_settings_settings_menu"
+          parent="edoob.school_configuration_menu"
+          action="edoob.edoob_settings_action"
+          sequence="-1"/>
+
+
+  <!-- Misc -->
+  <menuitem id="healthcare_settings_menu" name="Healthcare settings"
+            parent="edoob.school_configuration_menu" sequence="20"/>
+
+  <menuitem id="adm_menu_healthcare_allergy"
+            parent="healthcare_settings_menu" name="Allergies"
+            action="action_school_settings_healthcare_allergy"/>
+
+  <menuitem id="adm_menu_healthcare_condition"
+            parent="healthcare_settings_menu" name="Conditions"
+            action="action_school_settings_healthcare_condition"/>
+
+  <menuitem id="adm_menu_healthcare_medication"
+            parent="healthcare_settings_menu" name="Medications"
+            action="action_school_settings_healthcare_medication"/>
+
+
+  <menuitem id="school_paremeters_menu" name="School parameters"
+            parent="edoob.school_panel_menu"/>
+
+  <!-- People -->
+  <menuitem id="people_management" name="People management" parent="edoob.school_panel_menu" sequence="10"/>
+  <menuitem
+          id="menu_students" name="Students"
+          parent="edoob.people_management"
+          sequence="1"
+          action="action_school_students"/>
+
+  <menuitem id="menu_individuals" name="Individuals"
+            parent="edoob.people_management"
+            sequence="10"
+            action="action_school_individuals"/>
+
+
+  <menuitem id="menu_families" name="Families"
+            parent="edoob.people_management"
+            sequence="10"
+            action="action_school_families"/>
+
+  <!-- School structure -->
+
+  <menuitem
+          id="school_structure_menu"
+          name="School structure"
+          parent="edoob.school_configuration_menu"
+          sequence="1"/>
+
+  <menuitem
+          id="school_districts_menuitem"
+          parent="edoob.school_structure_menu"
+          name="District"
+          sequence="10"
+          action="edoob.school_districts_action"
+  />
+
+  <menuitem
+          id="school_schools_menuitem"
+          parent="edoob.school_structure_menu"
+          name="School"
+          sequence="20"
+          action="edoob.school_schools_action"
+  />
+
+  <menuitem
+          id="school_programs_menuitem"
+          parent="edoob.school_structure_menu"
+          name="Program"
+          sequence="40"
+          action="edoob.school_programs_action"
+  />
+
+  <menuitem
+          id="school_periods_menuitem"
+          parent="edoob.school_structure_menu"
+          name="Period"
+          sequence="50"
+          action="edoob.school_periods_action"
+  />
+
+  <menuitem
+          id="school_grades_menuitem"
+          parent="edoob.school_structure_menu"
+          name="Grade levels"
+          sequence="60"
+          action="edoob.school_grades_action"
+  />
+
+  <!-- Wizards -->
+  <menuitem id="edoob_migration_tool_menu_string" name="Migration Tool"
+            parent="edoob.school_configuration_menu" sequence="100"/>
+
+  <menuitem
+          id="edoob_migration_tool_menu"
+          name="Migration Tool Method"
+          action="edoob_migration_tool_action"
+          parent="edoob.edoob_migration_tool_menu_string"
+          sequence="100"/>
+
+</odoo>

@@ -1,0 +1,49 @@
+<odoo>
+    <data>
+        <!-- La vista hereda del formulario existente del modelo de producto -->
+        <record model="ir.ui.view" id="product_template_form_inherited">
+            <field name="name">product.template.form.inherited</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <!-- Agregamos el campo dollar_price encima del campo list_price -->
+                <xpath expr="//field[@name='categ_id']" position="before">
+                    
+                    <field name="dollar_price"/>
+                    <field name="bs_price"/>
+                </xpath>
+            </field>
+        </record>
+         <record model="ir.ui.view" id="custom_pos_config_kanban_view_inherit">
+            <field name="name">pos.config.kanban.view.inherit</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_config_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='container o_kanban_card_manage_pane dropdown-menu']//div[@class='col-6 o_kanban_card_manage_section o_kanban_manage_new']" position="inside">
+                   <div t-if="user_has_groups('base.group_erp_manager')">
+                        <div role="menuitem">
+                            <a id="report_x">Reporte X</a>
+                        </div>
+                        <div role="menuitem">
+                            <a id="report_z">Reporte Z</a>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_product_template_form" model="ir.ui.view">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <field name="bs_price" position="after">
+                <field name="is_generic_product"/>
+            </field>
+        </field>
+    </record>
+
+        
+
+    </data>
+</odoo>

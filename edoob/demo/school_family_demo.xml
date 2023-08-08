@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="family_1" model="school.family">
+    <field name="name">Chase, Jackie family</field>
+  </record>
+
+  <record id="family_2" model="school.family">
+    <field name="name">Catherine, Armes family</field>
+  </record>
+</odoo>

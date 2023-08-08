@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="enrollment_status_admission" model="school.enrollment.status">
+    <field name="name">Admission</field>
+    <field name="type">admissions</field>
+  </record>
+  <record id="enrollment_status_enrolled" model="school.enrollment.status">
+    <field name="name">Enrolled</field>
+    <field name="type">enrolled</field>
+  </record>
+  <record id="enrollment_status_graduate" model="school.enrollment.status">
+    <field name="name">Graduate</field>
+    <field name="type">graduate</field>
+  </record>
+  <record id="enrollment_status_inactive" model="school.enrollment.status">
+    <field name="name">Inactive</field>
+    <field name="type">inactive</field>
+  </record>
+  <record id="enrollment_status_pre_enrolled" model="school.enrollment.status">
+    <field name="name">Pre_enrolled</field>
+    <field name="type">pre-enrolled</field>
+  </record>
+  <record id="enrollment_status_withdrawn" model="school.enrollment.status">
+    <field name="name">Withdrawn</field>
+    <field name="type">withdrawn</field>
+  </record>
+</odoo>

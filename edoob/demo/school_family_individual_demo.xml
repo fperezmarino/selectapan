@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+  <record id="family_individual_1" model="school.family.individual">
+    <field name="first_name">Jackie</field>
+    <field name="last_name">Chase</field>
+    <field name="family_ids" eval="[(Command.link(ref('edoob.family_1')))]"/>
+    <field name="gender" ref="edoob.gender_female"/>
+  </record>
+
+  <record id="family_individual_2" model="school.family.individual">
+    <field name="first_name">Catherine</field>
+    <field name="last_name">Armes</field>
+    <field name="family_ids" eval="[(Command.link(ref('edoob.family_2')))]"/>
+    <field name="gender" ref="edoob.gender_female"/>
+  </record>
+
+</odoo>

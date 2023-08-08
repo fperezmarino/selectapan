@@ -1,0 +1,108 @@
+<odoo>
+
+    <record model="ir.ui.view" id="view_school_tree">
+        <field name="name">School codes</field>
+        <field name="model">school.school</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget='handle'/>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="district_id"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="view_grade_level_tree">
+        <field name="name">Grade level</field>
+        <field name="model">school.grade.level</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget='handle'/>
+                <field name="name"/>
+                <field name="capacity"/>
+                <field name="school_id"/>
+                <field name="district_id" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_district_level_tree">
+        <field name="name">District Code</field>
+        <field name="model">school.district</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget='handle'/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="school_enrollment_status_view_tree" model="ir.ui.view">
+        <field name="name">school.enrollment.status.view.tree</field>
+        <field name="model">school.enrollment.status</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="key"/>
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="school_enrollment_sub_status_view_tree" model="ir.ui.view">
+        <field name="name">school.enrollment.sub.status.view.tree</field>
+        <field name="model">school.enrollment.sub.status</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="id"/>
+                <field name="status_id"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="school.grade.level_type_view_tree" model="ir.ui.view">
+        <field name="name">school.grade.level.type.view.tree</field>
+        <field name="model">school.grade.level.type</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="type"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_relationship_tree" model="ir.ui.view">
+        <field name="name">Relationship</field>
+        <field name="model">school.student.relationship</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="family_id"/>
+                <field name="individual_id"/>
+                <field name="individual_relation_id"/>
+                <field name="relationship_type_id"/>
+                <field name="is_emergency_contact"/>
+                <field name="custody"/>
+                <field name="correspondence"/>
+                <field name="grade_related"/>
+                <field name="family_portal"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_relationship_type_tree" model="ir.ui.view">
+        <field name="name">Relationship</field>
+        <field name="model">school.student.relationship.type</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="key"/>
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

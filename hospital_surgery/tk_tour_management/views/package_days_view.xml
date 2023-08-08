@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="package_days_form_view" model="ir.ui.view">
+            <field name="name">package.days.form.view</field>
+            <field name="model">package.days</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="day"/>
+                            <h1>
+                                <field name="day" required="1" placeholder="Title"/>
+                            </h1>
+                        </div>
+                        <notebook>
+                            <page string="Activities">
+                                <field name="activities_ids">
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="title" required="1"/>
+                                                <field name="type" required="1"/>
+                                            </group>
+                                            <group>
+                                                <field name="transfer" required="1"/>
+                                                <field name="distance"
+                                                       attrs="{'invisible':[('type','not in',['trip'])]}"/>
+                                                <field name="note" required="1"/>
+                                            </group>
+                                        </group>
+                                        <group>
+                                            <group>
+                                                <field name="location_ids" invisible="1"/>
+                                                <field name="place_id"
+                                                       attrs="{'invisible':[('type','in',['trip'])]}"
+                                                       domain="[('location_id', 'in', location_ids)]"/>
+                                                <field name="from_destination"
+                                                       attrs="{'invisible':[('type','!=','trip')]}"/>
+                                                <field name="start" attrs="{'invisible':[('type','!=','trip')]}"
+                                                       widget="float_time" help="Time in 24 Hours"/>
+                                            </group>
+                                            <group>
+                                                <field name="duration"
+                                                       attrs="{'invisible':[('type','in',['trip'])]}"/>
+                                                <field name="time" attrs="{'invisible':[('type','in',['trip'])]}"/>
+                                                <field name="to_destination"
+                                                       attrs="{'invisible':[('type','!=','trip')]}"/>
+                                                <field name="end" attrs="{'invisible':[('type','!=','trip')]}"
+                                                       widget="float_time" help="Time in 24 Hours"/>
+                                            </group>
+                                        </group>
+                                        <group>
+                                            <field name="summary" required="1"/>
+                                        </group>
+                                    </form>
+                                    <kanban>
+                                        <field name="type"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div class="oe_kanban_global_click border-0" style="width:457px;">
+                                                    <div class="card" style="width:457px;">
+                                                        <div class="card-body">
+                                                            <div class="container">
+                                                                <h5 class="card-title">
+                                                                    <field name="title"/>
+                                                                    -
+                                                                    <field name="type" class="fs-6"/>
+                                                                </h5>
+                                                                <t t-if="record.type.raw_value == 'trip'">
+                                                                    <div class="row">
+                                                                        <div class="col">
+                                                                            <strong>
+                                                                                Transfer :
+                                                                            </strong>
+                                                                            <field name="transfer"/>
+                                                                            <br/>
+                                                                            <strong>
+                                                                                From :
+                                                                            </strong>
+                                                                            <field name="from_destination"/>
+                                                                            <br/>
+                                                                            <strong>
+                                                                                Departure Time :
+                                                                            </strong>
+                                                                            <field name="start"/>
+                                                                            <br/>
+                                                                            <strong>
+                                                                                Distance :
+                                                                            </strong>
+                                                                            <field name="distance"/>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <strong>
+                                                                                Note :
+                                                                            </strong>
+                                                                            <field name="note"/>
+                                                                            <br/>
+                                                                            <strong>
+                                                                                to :
+                                                                            </strong>
+                                                                            <field name="to_destination"/>
+                                                                            <br/>
+                                                                            <strong>
+                                                                                Reach Time :
+                                                                            </strong>
+                                                                            <field name="end"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <div class="row">
+                                                                        <div class="col">
+                                                                            <strong>
+                                                                                Transfer :
+                                                                            </strong>
+                                                                            <field name="transfer"/>
+                                                                            <br/>
+                                                                            <strong>
+                                                                                Place :
+                                                                            </strong>
+                                                                            <field name="place_id"/>
+                                                                            <br/>
+                                                                            <strong>
+                                                                                Time :
+                                                                            </strong>
+                                                                            <field name="time"/>
+                                                                        </div>
+                                                                        <div class="col">
+                                                                            <strong>
+                                                                                Note :
+                                                                            </strong>
+                                                                            <field name="note"/>
+                                                                            <br/>
+                                                                            <strong>
+                                                                                Duration :
+                                                                            </strong>
+                                                                            <field name="duration"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </t>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                                <group>
+                                    <group>
+                                        <field name="location_ids" invisible="1"/>
+                                        <field name="location_id" required="1" domain="[('id', 'in', location_ids)]"/>
+                                        <field name="hotel_id" required="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="night_stay" required="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="package_days_tree_view" model="ir.ui.view">
+            <field name="name">package.days.tree.view</field>
+            <field name="model">package.days</field>
+            <field name="arch" type="xml">
+                <tree string="Hotel Facilities">
+                    <field name="day"/>
+                </tree>
+            </field>
+        </record>
+        <record id="package_days_actions" model="ir.actions.act_window">
+            <field name="name">Package Days</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">package.days</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

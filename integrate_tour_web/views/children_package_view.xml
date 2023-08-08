@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- <record id="package_days_form_view" model="ir.ui.view">
+            <field name="name">integrate_tour_web.age_discounts.form.view</field>
+            <field name="model">integrate_tour_web.age_discounts</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="descuentos Por edad"/>
+                            <h1>
+                                <field name="age_discounts" required="1" />
+                            </h1>
+                        </div>
+                        <notebook>
+                            <page string="descuentos">
+                                <field name="activities_ids">
+                                    <form>
+                                        <group>
+                                            <group>
+                                            
+                                                <field name="age_since" required="1"/>
+                                                <field name="age_until" required="1"/>
+                                            
+                                            </group>
+                                            <group>
+                                                <field name="type_discounts" required="1"/>
+                                                <field name="discounts" required="1"/>
+                                            
+                                            
+                                            </group>
+                                            <field name="description" required="1"/>
+                                        </group>
+                                        
+                                    </form>
+                                    
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="package_age_discounts_tree_view" model="ir.ui.view">
+            <field name="name">package.age.discounts.tree.view</field>
+            <field name="model">integrate_tour_web.age_discounts</field>
+            <field name="arch" type="xml">
+                <tree string="Tipos de descuentos para niños y Adultos ">
+                    <field name="age_discounts"/>
+                    <field name="age_since"/>
+                    <field name="age_until"/>
+                    <field name="discounts"/>
+                </tree>
+            </field>
+        </record>
+        <record id="package_age_discounts_actions" model="ir.actions.act_window">
+            <field name="name">Package age discounts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">integrate_tour_web.age_discounts</field>
+            <field name="view_mode">tree,form</field>
+        </record> -->
+
+    </data>
+</odoo>

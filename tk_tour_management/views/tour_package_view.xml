@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tour_package_form_view" model="ir.ui.view">
+            <field name="name">tour.package.form.view</field>
+            <field name="model">tour.package</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="%(tour_booking_wizard_action)d"
+                                type='action'
+                                string="Book"
+                                class="btn btn-outline-dark"
+                                context="{'default_package_id':active_id}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title mb24">
+                            <h1>
+                                <field name="name" required="1" placeholder="Package Name"/>
+                            </h1>
+                            <h5>
+                                <field name="package_seq"/>
+                            </h5>
+                            <h4>
+                                <field name="type" widget="radio" nolabel="1"
+                                       options="{'horizontal': true}"/>
+                            </h4>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="location_ids" widget="many2many_tags" required="1"
+                                       options="{'color_field': 'color','no_open':True,'no_create':True}"/>
+                                <field name="tour_type" required="1"/>
+                            </group>
+                            <group>
+                                <field name="company_id" invisible="1"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="price" required="1"/>
+                                <field name="season" required="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="total_days" required="1"/>
+                                <field name="total_night" required="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Itineraries">
+                                <field name="days_ids">
+                                    <tree>
+                                        <field name="day"/>
+                                        <field name="hotel_id" widget="many2one_clickable"/>
+                                        <field name="places"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Facilities">
+                                <h3 style="color:#714B67;">
+                                    <strong>Facilities</strong>
+                                </h3>
+                                <field name="facilities_ids">
+                                    <kanban>
+                                        <field name="id"/>
+                                        <field name="name"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div class="oe_kanban_global_click border-bottom rounded"
+                                                     style="width:130px;height:60px;">
+                                                    <div style="width:40%;float:left;display:inline-block;">
+                                                        <img alt="Avtar"
+                                                             t-att-src="kanban_image('package.facilities','image',record.id.raw_value)"
+                                                             style="width:50px;height:40px;"/>
+                                                    </div>
+                                                    <div style="width:60%;float:right;display:inline-block;">
+                                                        <h5 style="color:#714B67;">
+                                                            <strong>
+                                                                <field name="name"/>
+                                                            </strong>
+                                                        </h5>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+                            <page string="Policies">
+                                <form>
+                                    <group>
+                                        <field name="on_cancellation"/>
+                                    </group>
+                                    <group>
+                                        <field name="on_date_change"/>
+                                    </group>
+                                </form>
+                            </page>
+                            <page string="Inclusions &amp; Exclusions">
+                                <group>
+                                    <group>
+                                        <field name="inclusion"/>
+                                    </group>
+                                    <group>
+                                        <field name="exclusion"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Notes">
+                                <group>
+                                    <group>
+                                        <field name="note"/>
+                                    </group>
+                                    <group>
+                                        <field name="payment"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Term &amp; Conditions">
+                                <group>
+                                    <field name="title_term_condition" nolabel="1" placeholder="Title...."/>
+                                    <field name="term_condition" nolabel="1"
+                                           placeholder="Term &amp; Condition....."/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="tour_package_tree_view" model="ir.ui.view">
+            <field name="name">tour.package.tree.view</field>
+            <field name="model">tour.package</field>
+            <field name="arch" type="xml">
+                <tree string="Tour Package">
+                    <field name="name"/>
+                    <field name="type"/>
+                    <field name="location_ids" widget="many2many_tags"
+                           options="{'color_field': 'color','no_open':True,'no_create':True}"/>
+                    <field name="price" widget="monetary"/>
+                </tree>
+            </field>
+        </record>
+        <record id="tour_package_search_view" model="ir.ui.view">
+            <field name="name">tour.package.search.view</field>
+            <field name="model">tour.package</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="type"/>
+                    <searchpanel>
+                        <field name="type" string="Package" enable_counters="1"/>
+                        <field name="season" string="Season" enable_counters="1"/>
+                        <field name="tour_type" string="Type" enable_counters="1"/>
+                    </searchpanel>
+                </search>
+            </field>
+        </record>
+
+        <record id="tour_package_action" model="ir.actions.act_window">
+            <field name="name">Tour Package</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tour.package</field>
+            <field name="view_mode">tree,form,activity</field>
+        </record>
+    </data>
+</odoo>

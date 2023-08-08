@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+<!--	<template id="printax_pos_module_ws.pos_order_list_template" inherit_id="web.assets_backend">
+			<xpath expr="." position="inside">
+				<link type="text/css" rel="stylesheet" href="/printax_pos_module_ws/static/src/css/print_fact_button.css" />
+				<script type="text/javascript" src="/printax_pos_module_ws/static/src/js/order_print_fisc.js" />
+			</xpath>
+		</template> -->
+
+		<record id="printax_pos_module_ws.pos_order_list" model="ir.ui.view">
+			<field name="name">printax_pos_module_ws.pos_order_list</field>
+			<field name="model">pos.order</field>
+			<field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+			<field name="arch" type="xml">
+
+				<header>
+					<button id="print_fact_buttone" string="Factura fiscal" attrs="{'invisible': ['|',('ptx_fiscal_invoice', '!=', False),('anulada','=','Anulad')]}"/>
+					<button id="anu_fact_button" string="Anular Factura" attrs="{'invisible': ['|',('ptx_fiscal_invoice', '=', False),('anulada','=','Anulad')]}" />
+				</header>
+
+				<xpath expr="//page[@name='extra']" position="inside">
+					<group>
+						<group>
+
+							<field name="ptx_fiscal_invoice" readonly="1"/>
+							<field name="ptx_serial_printer" readonly="1"/>
+							<field name="ptx_printing_date" readonly="1"/>
+							<field name="ptx_base_imponible" readonly="1"/>
+							<field name="ptx_impuesto_printer" readonly="1"/>
+							<field name="ptx_reporte_z" readonly="1"/>
+							<field name="anulada" readonly="1"/>
+						</group>
+					</group>
+				</xpath>
+			</field>
+		</record>
+		<record id="view_pos_order_tree_inherit" model="ir.ui.view">
+			<field name="name">pos.order.tree.inherit</field>
+			<field name="model">pos.order</field>
+			<field name="inherit_id" ref="point_of_sale.view_pos_order_tree"/>
+			<field name="arch" type="xml">
+				 <xpath expr="//field[@name='name']" position="after">
+					<!-- Agregar el nuevo campo personalizado -->
+					<field name="ptx_fiscal_invoice" />
+					<field name="is_invoice" widget="badge"  decoration-info="is_invoice == 'nofacturado'"  decoration-success="is_invoice == 'facturado'"   decoration-danger="is_invoice =='anulado' "/> 
+				</xpath>
+			</field>
+		</record>
+		<record id="point_of_sale.action_pos_pos_form" model="ir.actions.act_window">
+
+				<field name='domain'>[('ptx_fiscal_invoice', '!=', False)]</field>
+
+				</record>
+		<!-- <record id="pos_order_tree_view_inherit" model="ir.ui.view">
+			<field name="name">pos.order.tree.view.inherit</field>
+			<field name="model">pos.order</field>
+			<field name="inherit_id" ref="point_of_sale.pos_order_tree_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='domain']" position="replace">
+					<field name="domain">[
+						('state', 'not in', ['draft', 'cancel', 'invoiced']),
+						('ptx_fiscal_invoice', '!=', False),
+						'|', ('user_id', '!=', env.user.id), ('user_id', '=', False)
+					]</field>
+				</xpath>
+			</field>
+		</record> -->
+	</data>
+</odoo>

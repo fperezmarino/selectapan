@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <record model="ir.actions.act_window" id="edoob_migration_tool_action">
+      <field name="name">Edoob Migration Tool Wizard Action</field>
+      <field name="res_model">edoob.migration.tool.wizard</field>
+      <field name="view_mode">form</field>
+      <field name="target">inline</field>
+   </record>
+
+   <record id="edoob_migration_tool" model="ir.ui.view">
+      <field name="name">edoob.migration.tool.form</field>
+      <field name="model">edoob.migration.tool.wizard</field>
+      <field name="arch" type="xml">
+         <form>
+            <sheet>
+               <group>
+               <group style="text-align: right;">
+                  <h2>Method :</h2>
+               </group>
+               <group>
+                  <field name="select_method"/>
+                  <field name="custom_method" attrs="{'invisible': [('select_method','!=','custom')]}"/>
+               </group>
+               </group>
+                   <button string="Generate JSON" name="button_generate_json" type="object" class="oe_highlight text-capitalize"/>
+               <notebook>
+                  <page name="resume" string="Resume">
+                     <group>
+                        <group>
+                           <field name="student" />
+                           <field name="families" />
+                           <field name="individuals" />
+                        </group>
+                         <group>
+                           <field name="districts" />
+                           <field name="schools" />
+                           <field name="programs" />
+                            <field name="period_categories" />
+                           <field name="periods" />
+                           <field name="grade_level" />
+                        </group>
+                     </group>
+                  </page>
+
+                  <page string="Edit JSON" name="edit_json">
+
+                  </page>
+               </notebook>
+               <group>
+                  <footer class="text-right">
+                  <button string="Migrate Data" name="button_generate_json" type="object" class="oe_highlight text-capitalize" />
+               </footer>
+               </group>
+            </sheet>
+         </form>
+      </field>
+   </record>
+
+
+
+     <record id="edoob_migration_tool_method" model="ir.ui.view">
+      <field name="name">edoob.migration.tool.method.form</field>
+      <field name="model">edoob.migration.tool.method</field>
+      <field name="arch" type="xml">
+         <form>
+            <sheet>
+               <group>
+                   <group colspan="1" name="left_group">
+                     <field name="name" placeholder="Method Name"/>
+                  </group>
+               </group>
+
+               <notebook>
+                  <page name="script" string="Script">
+                     <field name="script" widget="ace" options="{'mode': 'python'}"/>
+                  </page>
+
+                  <page name="generated_json" string="Generated JSON">
+                      <field name="generated_json" widget="ace" options="{'mode': 'python'}"/>
+                  </page>
+                  <page name="help" string="Help">
+                  </page>
+               </notebook>
+            </sheet>
+         </form>
+      </field>
+   </record>
+</odoo>

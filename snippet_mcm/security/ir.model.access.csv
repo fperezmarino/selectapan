@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_snippet_mcm_snippet_mcm,snippet_mcm.snippet_mcm,model_snippet_mcm_snippet_mcm,base.group_user,1,1,1,1

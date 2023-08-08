@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+  <record model="ir.actions.act_window" id="action_school_families">
+    <field name="name">Families</field>
+    <field name="res_model">school.family</field>
+    <field name="view_mode">kanban,tree,form</field>
+  </record>
+
+  <record id="school_family_view_form" model="ir.ui.view">
+    <field name="name">school.family.view.form</field>
+    <field name="model">school.family</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <field name="id" invisible="1"/>
+          <h1 style="font-size: xx-large; color: #875A7B; font-weight: bold;" class="mt0 mb0">
+            Family
+          </h1>
+          <field name="avatar_128" invisible="1"/>
+          <field name="image_1920" widget='image' class="oe_avatar" options='{"preview_image": "avatar_128"}'/>
+
+          <div class="oe_title">
+            <h1>
+              <field name="name" placeholder="Name" force_save="1"/>
+            </h1>
+          </div>
+          <group>
+            <field name="id" invisible="1"/>
+          </group>
+          <notebook name="main_notebook">
+            <page string="Individuals" name="individuals">
+              <field name="individual_ids" context="{'default_family_ids': [id]}">
+                <kanban>
+                  <field name="name"/>
+                  <templates>
+                    <t t-name="kanban-box">
+                      <div class="o_kanban_card oe_kanban_global_click p-4 o_edoob_individual_image d-flex">
+                        <field name="avatar_128" widget="image"
+                               options="{'zoom_delay': 1000, 'preventClicks': false}"/>
+                        <div class="oe_kanban_content pl-3 pr-3">
+                          <strong><field name="name"/></strong>
+                        </div>
+                        <button style="pointer-events:auto; top:1rem; right:1rem; position:absolute;"
+                                class="btn btn-primary"
+                                title="open" type="object" name="open_record">
+                          <i class="fa fa-share-square-o"/>
+                        </button>
+                      </div>
+                    </t>
+                  </templates>
+                </kanban>
+              </field>
+            </page>
+            <page string="Students" name="students">
+              <field name="student_ids"
+                     context="{'default_family_ids': [id]}"
+                     domain="[('student_ids', '!=', False)]">
+                <kanban>
+                  <field name="name"/>
+                  <templates>
+                    <t t-name="kanban-box">
+                      <div class="o_kanban_card oe_kanban_global_click p-4 o_edoob_individual_image d-flex">
+                        <field name="avatar_128" widget="image"
+                               options="{'zoom_delay': 1000, 'preventClicks': false}"/>
+                        <div class="oe_kanban_content pl-3 pr-3">
+                          <strong><field name="name"/></strong>
+                        </div>
+                        <button style="pointer-events:auto; top:1rem; right:1rem; position:absolute;"
+                                class="btn btn-primary"
+                                title="open" type="object" name="open_record">
+                          <i class="fa fa-share-square-o"/>
+                        </button>
+                      </div>
+                    </t>
+                  </templates>
+                </kanban>
+              </field>
+            </page>
+
+            <page string="Academics" name="academics">
+
+            </page>
+            <page string="Other" name="other">
+
+            </page>
+          </notebook>
+        </sheet>
+        <div class="oe_chatter" modifiers="{}">
+          <field name="message_follower_ids" />
+          <field name="activity_ids" />
+          <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+        </div>
+      </form>
+    </field>
+  </record>
+
+  <record id="school_family_view_search" model="ir.ui.view">
+    <field name="name">school.family.view.search</field>
+    <field name="model">school.family</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name" string="Family"
+               filter_domain="[
+                    '|', '|',
+                    ('name', 'ilike', self), ('student_ids', 'ilike', self),
+                    ('individual_ids', 'ilike', self)]"/>
+        <field name="student_ids" />
+        <field name="individual_with_students_ids" />
+      </search>
+    </field>
+  </record>
+  
+  <record id="school_family_view_kanban" model="ir.ui.view">
+    <field name="name">school.family.view.kanban</field>
+    <field name="model">school.family</field>
+    <field name="arch" type="xml">
+      <kanban>
+        <field name="id"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+              <field name="avatar_128" widget="image"
+                     class="o_kanban_image_fill_left"
+                     options="{'zoom': true, 'zoom_delay': 1000, 'background': true, 'preventClicks': false}"/>
+              <div class="oe_kanban_details">
+                <div class="o_kanban_record_top">
+                  <div class="o_kanban_record_headings">
+                    <div class="o_kanban_record_title">
+                      <field name="name"/>
+                    </div>
+                    <ul>
+                      <li>
+                        <b>Individuals:</b>
+                        <field name="individual_ids" widget="many2many_tags_avatar"/>
+                      </li>
+                      <li>
+                        <b>Students:</b>
+                        <field name="student_ids" widget="many2many_tags_avatar"/>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="o_dropdown_kanban dropdown">
+                    <a role="button" class="dropdown-toogle o-no-caret btn" data-toggle="dropdown" data-display="static"
+                       href="#" aria-label="Dropdown menu" title="Dropdown menu">
+                      <span class="fa fa-ellipsis-v"/>
+                    </a>
+                    <div class="dropdown-menu" role="menu">
+                      <a role="menuitem" type="edit" class="dropdown-item">Edit</a>
+                      <a role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <record id="school_family_view_tree" model="ir.ui.view">
+    <field name="name">school.family.view.tree</field>
+    <field name="model">school.family</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+        </tree>
+    </field>
+  </record>
+ 
+</odoo>

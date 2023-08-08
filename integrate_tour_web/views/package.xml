@@ -1,0 +1,90 @@
+<odoo>
+    <data>
+   
+        <template id="assets_frontend" name="Assets Frontend">
+            
+        </template>
+    
+
+    <template id="package_views_1" name="package">
+                <link rel="stylesheet" href="integrate_tour_web/static/src/css/ionicons.min.css"/>
+                <link rel="stylesheet" href="integrate_tour_web/static/src/css/icomoon.css"/>
+                <link rel="stylesheet" href="integrate_tour_web/static/src/css/style.css"/>
+        <div id="Cabecera" class="oe_structure"></div>
+        <t t-call="website.layout">
+            <div id="cb_pack" class="oe_structure"></div>
+            <xpath expr="//t[@t-call='website.navbar']" position="after">
+             <input type="hidden" id="precioH" name="precio" value=""/>
+                                <input type="hidden" id="locationH" name="location" value=""/>
+                                <input type="hidden" id="hotelH" name="hotel" value=""/>
+                                <input type="hidden" id="paginado" name="paginado" value="0"/>
+                <section class="ftco-section ftco-degree-bg">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-3 sidebar ftco-animate fadeInUp ftco-animated">
+                                <div class="sidebar-wrap bg-light ftco-animate fadeInUp ftco-animated">
+                                    <h3 class="heading mb-4">Filtro</h3>
+                                    <form action="#">
+                                        <div class="fields">
+                                    <div class="form-group">
+                                        <div class="select-wrap one-third">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="" id="" class="form-control allPrice" placeholder="Precios">
+                                        <option value="initial">Precios</option>
+                                        <option value="">Todos</option>
+                                        <option value="price asc">Ascendente</option>
+                                        <option value="price desc">descendente</option>
+                                        
+                                        </select>
+                                    </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <div class="select-wrap one-third">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="" id="" class="form-control ubica" placeholder="Keyword search">
+                                        <option value="">Ubicación</option>
+                                        <t t-foreach="localizacion" t-as="location" t-if="localizacion">
+                                            <option t-att-value="location.id"><span t-esc="location.name" /></option>
+                                        </t>
+                                        </select>
+                                    </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="select-wrap one-third">
+                                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                        <select name="" id="" class="form-control hoteles" placeholder="Keyword search">
+                                        <option value="">Seleciona un Hoteles</option>
+                                        <t t-foreach="h" t-as="hotel" t-if="hotel">
+                                            <option t-att-value="h.id"><span t-esc="h.name" /></option>
+                                        </t>
+                                        </select>
+                                    </div>
+                                    </div>
+                                    
+                                    <!-- <div class="form-group">
+                                        <input type="submit" value="Search" class="btn btn-primary py-3 px-5"/>
+                                    </div> -->
+                                    </div>
+                                </form>
+                                </div>
+                                
+                                </div>
+                                <div class="col-lg-9">
+          	                        <div class="row" id="insert">
+                                
+                                    
+                                        
+                                    </div>
+                                </div>
+                            <!-- .col-md-8 -->
+                        </div>
+                    </div>
+                </section>
+            </xpath>
+            <div id="wrapaa" class="oe_structure"></div>
+        </t>
+    </template>
+    </data>
+</odoo>

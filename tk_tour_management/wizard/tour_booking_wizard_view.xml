@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="tour_booking_wizard_form_view" model="ir.ui.view">
+            <field name="name">tour.booking.wizard.form.view</field>
+            <field name="model">tour.booking.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="package_id" invisible="1"/>
+                            <field name="customer_id" required="1"/>
+                            <field name="no_of_people" required="1"/>
+                        </group>
+                        <group>
+                            <field name="start_time"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Book" type="object" name="action_book_package" class="btn btn-outline-success"/>
+                        <button string="Cancel" special="cancel" class="btn btn-outline-danger"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="customer_booking_wizard_form_view" model="ir.ui.view">
+            <field name="name">customer.booking.wizard.form.view</field>
+            <field name="model">tour.booking.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="package_id" required="1"/>
+                            <field name="customer_id" invisible="1"/>
+                            <field name="no_of_people" required="1"/>
+                        </group>
+                        <group>
+                            <field name="start_time"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Book" type="object" name="action_book_package" class="btn btn-outline-success"/>
+                        <button string="Cancel" special="cancel" class="btn btn-outline-danger"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="customer_booking_wizard_inquiry_form_view" model="ir.ui.view">
+            <field name="name">customer.booking.wizard.inquiry.form.view</field>
+            <field name="model">tour.booking.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="package_id" required="1"/>
+                            <field name="customer_id" required="1"/>
+                        </group>
+                        <group>
+                            <field name="no_of_people" required="1"/>
+                            <field name="start_time"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string="Book" type="object" name="action_book_package" class="btn btn-outline-success"/>
+                        <button string="Cancel" special="cancel" class="btn btn-outline-danger"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="tour_booking_wizard_action" model="ir.actions.act_window">
+            <field name="name">Tour Booking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tour.booking.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="tour_booking_wizard_form_view"/>
+            <field name="target">new</field>
+        </record>
+        <record id="customer_booking_wizard_action" model="ir.actions.act_window">
+            <field name="name">Tour Booking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tour.booking.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="customer_booking_wizard_form_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <record id="customer_booking_inquiry_wizard_action" model="ir.actions.act_window">
+            <field name="name">Tour Booking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tour.booking.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="customer_booking_wizard_inquiry_form_view"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

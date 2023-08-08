@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+  <!-- District views -->
+  <record id="school_districts_action" model="ir.actions.act_window">
+    <field name="name">Districts</field>
+    <field name="res_model">school.district</field>
+    <field name="view_mode">kanban,tree,form</field>
+  </record>
+
+  <record id="school_district_view_search" model="ir.ui.view">
+    <field name="name">school.district.view.search</field>
+    <field name="model">school.district</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name"/>
+        <field name="company_ids"/>
+        <searchpanel>
+          <field name="company_ids" select="multi" string="Company" icon="fa-building" color="#4682b4"/>
+        </searchpanel>
+      </search>
+    </field>
+  </record>
+
+  <record id="school_district_view_kanban" model="ir.ui.view">
+    <field name="name">school.district.view.kanban</field>
+    <field name="model">school.district</field>
+    <field name="arch" type="xml">
+      <kanban>
+        <field name="name"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+              <field name="image_128" widget="image" class="o_kanban_image_fill_left"
+                     options="{'zoom': true, 'zoom_delay': 1000, 'background': true, 'preventClicks': false}"/>
+              <div class="oe_kanban_details">
+                <div class="o_kanban_record_top">
+                  <div class="o_kanban_record_headings">
+                    <div class="o_kanban_record_title">
+                      <field name="name"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <record id="school_district_view_tree" model="ir.ui.view">
+    <field name="name">school.district.view.tree</field>
+    <field name="model">school.district</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="school_district_view_form" model="ir.ui.view">
+    <field name="name">school.district.view.form</field>
+    <field name="model">school.district</field>
+    <field name="arch" type="xml">
+      <form>
+        <field name="id" invisible="1"/>
+        <sheet>
+          <field name="image_1920" widget="image" class="oe_avatar"/>
+          <div class="oe_title">
+            <label for="name" class="oe_edit_only"/>
+            <h1>
+              <field name="name"/>
+            </h1>
+          </div>
+          <group>
+            <group name="left_group">
+            </group>
+            <group name="right_group">
+              <field name="company_ids"
+                     groups="base.group_multi_company" widget="many2many_tags"/>
+            </group>
+          </group>
+          <notebook>
+            <page name="schools" string="Schools">
+              <field name="school_ids" mode="kanban"
+                     context="{'default_company_ids': company_ids, 'default_district_company_ids': company_ids}">
+                <form>
+                  <sheet>
+                    <field name="image_1920" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                      <label for="name" class="oe_edit_only"/>
+                      <h1>
+                        <field name="name"/>
+                      </h1>
+                    </div>
+                    <group>
+                      <group>
+                        <field name="district_company_ids" invisible="1"/>
+                        <field name="company_ids" domain="[('id', 'in', district_company_ids)]"
+                               groups="base.group_multi_company" widget="many2many_tags"/>
+                      </group>
+                    </group>
+                    <notebook>
+                      <page name="program_ids" string="Programs">
+                        <field name="program_ids"/>
+                      </page>
+                    </notebook>
+                  </sheet>
+                </form>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- School views -->
+  <record id="school_schools_action" model="ir.actions.act_window">
+    <field name="name">Schools</field>
+    <field name="res_model">school.school</field>
+    <field name="view_mode">kanban,tree,form</field>
+  </record>
+
+  <record id="school_school_view_search" model="ir.ui.view">
+    <field name="name">school.school.view.search</field>
+    <field name="model">school.school</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name"/>
+        <field name="district_id"/>
+        <searchpanel>
+          <field name="district_id" select="multi" string="Districts" icon="fa-building" color="#4682b4"/>
+        </searchpanel>
+      </search>
+    </field>
+  </record>
+
+  <record id="school_school_view_kanban" model="ir.ui.view">
+    <field name="name">school.school.view.kanban</field>
+    <field name="model">school.school</field>
+    <field name="arch" type="xml">
+      <kanban default_group_by="district_id">
+        <field name="name"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+              <field name="image_128" widget="image" class="o_kanban_image_fill_left"
+                     options="{'zoom': true, 'zoom_delay': 1000, 'background': true, 'preventClicks': false}"/>
+              <div class="oe_kanban_details">
+                <div class="o_kanban_record_top">
+                  <div class="o_kanban_record_headings">
+                    <div class="o_kanban_record_title">
+                      <field name="name"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="o_kanban_record_body">
+                  <ul>
+                    <li><field name="program_ids" widget="many2many_tags"/></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <record id="school_school_view_tree" model="ir.ui.view">
+    <field name="name">school.school.view.tree</field>
+    <field name="model">school.school</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="district_id"/>
+        <field name="program_ids" widget="many2many_tags"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="school_school_view_form" model="ir.ui.view">
+    <field name="name">school.school.view.form</field>
+    <field name="model">school.school</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <field name="image_1920" widget="image" class="oe_avatar"/>
+          <div class="oe_title">
+            <label for="name" class="oe_edit_only"/>
+            <h1>
+              <field name="name"/>
+            </h1>
+          </div>
+          <group>
+            <group name="left_group">
+              <field name="district_id"/>
+            </group>
+            <group name="right_group">
+              <field name="company_ids" groups="base.group_multi_company" widget="many2many_tags"/>
+            </group>
+          </group>
+          <notebook>
+            <page name="program_ids" string="Programs">
+              <field name="program_ids"/>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Program views -->
+  <record id="school_programs_action" model="ir.actions.act_window">
+    <field name="name">Programs</field>
+    <field name="res_model">school.program</field>
+    <field name="view_mode">kanban,tree,form</field>
+  </record>
+
+  <record id="school_program_view_search" model="ir.ui.view">
+    <field name="name">school.program.view.search</field>
+    <field name="model">school.program</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name"/>
+        <field name="school_id"/>
+        <field name="school_district_id"/>
+        <field name="parent_id"/>
+
+        <filter name="filter_root_parent" string="Root parent" domain="[('parent_id', '=', False)]"/>
+
+        <searchpanel>
+          <field name="school_id" select="multi" string="District/School" groupby="district_id" icon="fa-building"
+                 color="#4682b4"/>
+        </searchpanel>
+      </search>
+    </field>
+  </record>
+
+  <record id="school_program_view_kanban" model="ir.ui.view">
+    <field name="name">school.program.view.kanban</field>
+    <field name="model">school.program</field>
+    <field name="arch" type="xml">
+      <kanban default_group_by="school_id">
+        <field name="name"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_global_click o_kanban_record">
+              <div class="oe_kanban_details">
+                <div class="o_kanban_record_top">
+                  <div class="o_kanban_record_headings">
+                    <div class="o_kanban_record_title">
+                      <field name="name"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
+  </record>
+
+  <record id="school_program_view_tree" model="ir.ui.view">
+    <field name="name">school.program.view.tree</field>
+    <field name="model">school.program</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="display_name"/>
+        <field name="child_ids" widget="many2many_tags"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="school_program_view_form" model="ir.ui.view">
+    <field name="name">school.program.view.form</field>
+    <field name="model">school.program</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <field name="id" invisible="1"/>
+          <group>
+            <group name="left_group">
+              <field name="name"/>
+              <field name="school_id"/>
+            </group>
+            <group name="right_group">
+              <field name="parent_id"/>
+            </group>
+            <group colspan="2">
+              <field name="period_ids">
+                <tree>
+                  <field name="name"/>
+                  <field name="child_ids" widget="many2many_tags"/>
+                </tree>
+              </field>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Period views -->
+  <record id="school_periods_action" model="ir.actions.act_window">
+    <field name="name">Periods</field>
+    <field name="res_model">school.period</field>
+    <field name="view_mode">tree,form</field>
+    <field name="context">{
+      'search_default_group_by_program_id': 1
+      }</field>
+  </record>
+
+  <record id="school_period_view_search" model="ir.ui.view">
+    <field name="name">school.period.view.search</field>
+    <field name="model">school.period</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name"/>
+        <field name="program_id"/>
+
+        <filter name="group_by_program_id" string="Program" context="{'group_by': 'program_id'}"/>
+
+        <searchpanel>
+          <field name="program_id" select="multi" string="School/Program" groupby="school_id" icon="fa-building"
+                 color="#4682b4"/>
+        </searchpanel>
+      </search>
+    </field>
+  </record>
+
+  <record id="school_period_view_tree" model="ir.ui.view">
+    <field name="name">school.period.view.tree</field>
+    <field name="model">school.period</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="display_name"/>
+        <field name="date_start"/>
+        <field name="date_end"/>
+        <field name="child_ids" widget="many2many_tags"/>
+        <field name="program_id"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="school_period_view_form" model="ir.ui.view">
+    <field name="name">school.period.view.form</field>
+    <field name="model">school.period</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <field name="id" invisible="1"/>
+          <group>
+            <group name="left_group">
+              <field name="name"/>
+              <field name="date_start"
+                     options="{'related_end_date': 'date_end'}"
+                     attrs="{'readonly': [('child_ids', '!=', [])]}"
+              />
+              <field name="category_id"/>
+            </group>
+            <group name="right_group">
+              <field name="parent_id"/>
+              <field name="date_end"
+                     options="{'related_start_date': 'date_start'}"
+                     attrs="{'readonly': [('child_ids', '!=', [])]}"/>
+              <field name="program_id" force_save="1"/>
+            </group>
+            <group colspan="2">
+              <field name="child_ids" context="{'default_parent_id': id}">
+                <tree>
+                  <field name="name"/>
+                  <field name="date_start"/>
+                  <field name="date_end"/>
+                  <field name="category_id"/>
+                  <field name="child_ids" widget="many2many_tags"/>
+                </tree>
+              </field>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Grade views -->
+  <record id="school_grades_action" model="ir.actions.act_window">
+    <field name="name">Grade Levels</field>
+    <field name="res_model">school.grade.level</field>
+    <field name="view_mode">tree,form</field>
+    <field name="context">{
+      'search_default_group_by_program_id': 1
+      }</field>
+  </record>
+
+  <record id="school_grade_view_search" model="ir.ui.view">
+    <field name="name">school.grade.view.search</field>
+    <field name="model">school.grade.level</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="name"/>
+        <field name="program_id"/>
+        <field name="school_id"/>
+        <field name="district_id"/>
+        <field name="capacity"/>
+
+        <filter name="group_by_program_id" string="Program" context="{'group_by': 'program_id'}"/>
+        <filter name="group_by_school_id" string="School" context="{'group_by': 'school_id'}"/>
+        <filter name="group_by_district_id" string="District" context="{'group_by': 'district_id'}"/>
+
+        <searchpanel>
+          <field name="program_id" select="multi" string="School/Program" groupby="school_id" icon="fa-building"
+                 color="#4682b4"/>
+          <field name="district_id" select="multi" icon="fa-flag" color="#4682b4"/>
+        </searchpanel>
+      </search>
+    </field>
+  </record>
+
+  <record id="school_grade_view_tree" model="ir.ui.view">
+    <field name="name">school.grade.view.tree</field>
+    <field name="model">school.grade.level</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="sequence" widget="handle"/>
+        <field name="name"/>
+        <field name="program_id"/>
+        <field name="school_id"/>
+        <field name="district_id"/>
+        
+        <field name="next_program_id"/>
+        <field name="next_grade_level_id" />
+        <field name="next_status_id"/>
+        
+        <field name="capacity" sum="Total capacity"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="school_grade_view_form" model="ir.ui.view">
+    <field name="name">school.grade.view.form</field>
+    <field name="model">school.grade.level</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <group name="left_group">
+              <field name="name"/>
+              <field name="capacity"/>
+              <field name="next_program_id"/>
+              <field name="next_grade_level_id"/>
+              <field name="next_status_id"/>
+            </group>
+            <group name="right_group">
+              <field name="program_id"/>
+              <field name="school_id" readonly="1"/>
+              <field name="district_id" readonly="1"/>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+</odoo>

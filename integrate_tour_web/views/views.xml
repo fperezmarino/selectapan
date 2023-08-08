@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="fuge_layout" inherit_id="website.layout"
+              name="Fuge Layout">
+        <!-- Add an element after the top menu  -->
+        <xpath expr="//div[@id='wrapwrap']/main" position="before">
+            <html lang="en">
+
+                <head>
+
+                    <meta charset="UTF-8"/>
+                    <meta name="viewport"
+                          content="width=device-width, initial-scale=1.0"/>
+                    <title>Fuge</title>
+                     <link rel="shortcut icon" type="image/x-icon"
+                          href="x-icon.png"/>
+                    <link rel="stylesheet"
+                          href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+                          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+                          crossorigin="anonymous"/>
+                    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                          rel="stylesheet"/>
+                    <link rel="stylesheet" type="text/css"
+                          href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css"/>
+                    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+                          rel="stylesheet"/>
+                    <link rel="stylesheet"
+                          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"/>
+                  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/> -->
+   
+                </head>
+            </html>
+
+        </xpath>
+    </template>
+
+      <record model="ir.ui.view" id="insertcamptour">
+            <field name="name">tour.insert.field</field>
+            <field name="model">tour.package</field>
+            <field name="inherit_id" ref = "tk_tour_management.tour_package_form_view"/>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                  <xpath  expr="//div[@class='oe_title mb24']"  position="replace">
+                        <div class="row">
+                              <div class="col-8" >
+                              <h1>
+                                    <field name="name" required="1" placeholder="Package Name"/>
+                              </h1>
+                              <h5>
+                                    <field name="package_seq"/>
+                              </h5>
+                              <h4>
+                                    <field name="type" widget="radio" nolabel="1"
+                                          options="{'horizontal': true}"/>
+                              </h4>
+                              
+                              </div>
+                              <div class="col-4" >
+                                    <field name="image" style="width:100%;height:100%;" class="img-thumbnail float-right"
+                                          widget="image"/>
+                              </div>
+                        </div>
+                        
+                        
+                  </xpath>
+                  
+                  <xpath  expr="//field[@name='price']"  position="after">
+                        <field name="currency"   />
+                        <field name= "descuentos_web" />
+                        <field name= "f_d_desde" />
+                        <field name= "f_d_hasta" />
+                         <field name= "website_published" widget="boolean_toggle" string="Publicado en la Web"/>
+                        
+
+                    
+                </xpath>
+                 <notebook>
+                  <page string="Description">
+                  <group>
+                        <group>
+                              <field name="reseña" string="Reseña Corta"/>
+                        </group>
+                        <group>
+                              <field name="description" string="Description Completa" />
+                        </group>
+                  </group>                  
+                  </page>
+
+                  <!-- <page string="Descuentos por edades">
+                        <field name="age_ids">
+                        <tree editable="top">
+                              <field name="age_discounts"/>
+                              <field name="age_since"/>
+                              <field name="age_until"/>
+                              <field name="discounts"/>
+                              <field name="type_discounts"/>
+                              <field name="description" string="Description Completa" />
+                              
+                        </tree>
+                        </field>
+                  </page> -->
+
+                  </notebook>
+            </field>
+        </record>
+
+
+
+</odoo>

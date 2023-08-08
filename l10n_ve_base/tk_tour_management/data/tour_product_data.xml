@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--Payment Product-->
+    <data noupdate="1">
+        <record id="product_category_tour" model="product.category">
+            <field name="parent_id" ref="product.product_category_all"/>
+            <field name="name">Tour</field>
+        </record>
+        <record id="tour_product_1" model="product.product">
+            <field name="name">Package</field>
+            <field name="detailed_type">service</field>
+            <field name="categ_id" ref="tk_tour_management.product_category_tour"/>
+        </record>
+        <record id="tour_product_2" model="product.product">
+            <field name="name">Insurance</field>
+            <field name="detailed_type">service</field>
+            <field name="categ_id" ref="tk_tour_management.product_category_tour"/>
+        </record>
+        <record id="tour_product_3" model="product.product">
+            <field name="name">addons</field>
+            <field name="detailed_type">service</field>
+            <field name="categ_id" ref="tk_tour_management.product_category_tour"/>
+        </record>
+        <record id="tour_product_4" model="product.product">
+            <field name="name">Flight</field>
+            <field name="detailed_type">service</field>
+            <field name="categ_id" ref="tk_tour_management.product_category_tour"/>
+        </record>
+    </data>
+</odoo>

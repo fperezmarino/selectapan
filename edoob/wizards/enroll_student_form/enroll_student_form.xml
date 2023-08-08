@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <record id="enroll_student_form_action" model="ir.actions.act_window">
+    <field name="name">Enroll Student</field>
+    <field name="res_model">enroll.student.form</field>
+    <field name="view_mode">form</field>
+    <field name="view_mode">form</field>
+    <field name="target">inline</field>
+  </record>
+
+  <record id="enroll_student_form" model="ir.ui.view">
+    <field name="name">enroll.student.form</field>
+    <field name="model">enroll.student.form</field>
+    <field name="arch" type="xml" >
+      <form js_class="enroll_student_wizard_form_view">
+        <header>
+          <field name="state" widget="statusbar"/>
+        </header>
+        <sheet>
+          <group colspan="1" id="main_group">
+
+          </group>
+          <footer class="text-right">
+            <button name="move_previous_step" type="object" string="Prev"/>
+            <button name="move_next_step" type="object" string="Next"/>
+            <button name="enroll" type="object" string="Enroll"/>
+          </footer>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="enroll_student_form_step0_students" model="ir.ui.view">
+    <field name="name">enroll.student.form.step.0.students</field>
+    <field name="model">enroll.student.form</field>
+    <field name="inherit_id" ref="enroll_student_form"/>
+    <field name="arch" type="xml">
+      <group id="main_group" position="inside">
+        <group name="student_step" edoob_step="0">
+          <field name="family_ids" invisible="1" />
+          <field name="student_ids" mode="kanban" context="{'default_family_ids': family_ids}"/>
+        </group>
+      </group>
+    </field>
+  </record>
+
+  <record id="enroll_student_form_step10_family" model="ir.ui.view">
+    <field name="name">enroll.student.form.step.10.family</field>
+    <field name="model">enroll.student.form</field>
+    <field name="inherit_id" ref="enroll_student_form"/>
+    <field name="arch" type="xml">
+      <group id="main_group" position="inside">
+        <group name="family_step" edoob_step="10">
+          <field name="real_family_ids" invisible="1" />
+          <field name="individual_ids" invisible="1" />
+          <field name="family_ids" mode="kanban"
+                 context="{'default_form_id': id}"
+                 domain="[('id', 'not in', real_family_ids)]"
+                 widget="enroll_family_one2many"/>
+        </group>
+      </group>
+    </field>
+  </record>
+  <record id="enroll_student_form_step20_relationship" model="ir.ui.view">
+    <field name="name">enroll.student.form.step.20.relationship</field>
+    <field name="model">enroll.student.form</field>
+    <field name="inherit_id" ref="enroll_student_form"/>
+    <field name="arch" type="xml">
+      <group id="main_group" position="inside">
+        <group name="family_step" edoob_step="20" colspan="4">
+          <h1>Relationship</h1>
+          <group cols="2" colspan="4">
+            <field name="relationship_ids" class="o_edoob_relationship_table">
+              <tree editable="bottom" create="0" delete="0">
+                <field name="student_id" readonly="1"/>
+                <field name="individual_id" readonly="1"/>
+                <field name="relationship_id" />
+              </tree>
+            </field>
+          </group>
+        </group>
+      </group>
+    </field>
+  </record>
+
+
+</odoo>

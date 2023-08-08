@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tour_location_form_view" model="ir.ui.view">
+            <field name="name">tour.location.form.view</field>
+            <field name="model">tour.location</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="cover_image" class="oe_avatar" widget="image"/>
+                        <div class=" oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <span class="o_form_label o_td_label" name="address_name">
+                                    <b>Location</b>
+                                </span>
+                                <div class="o_address_format">
+                                    <field name="city" placeholder="City" class="o_address_city"/>
+                                    <field name="state_id" class="o_address_state" placeholder="State"
+                                           options="{'no_open': True, 'no_quick_create': True}"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country"
+                                           options="{'no_open': True, 'no_quick_create': True}"/>
+                                </div>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Geographic Location">
+                                <field name="latitude" required="1" placeholder="-90.00000000"/>
+                                <field name="longitude" required="1" placeholder="-180.00000000"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Places">
+                                <field name="place_ids" options="{'no_open': True}">
+                                    <kanban>
+                                        <field name="id"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div class="oe_kanban_global_click border-0"
+                                                     style="width:210px;height:365px;font-size:12px;">
+                                                    <div class="card" style="width:230px;">
+                                                        <img alt="Avtar"
+                                                             t-att-src="kanban_image('tour.place','main_image',record.id.raw_value)"
+                                                             style="width:227px;height:200px;"/>
+                                                        <div class="card-body"
+                                                             style="width:228px;height:110px;background-color: rgb(255 255 255 / 90%) !important;">
+                                                            <h6 class="card-title">
+                                                                <field name="name"/>
+                                                            </h6>
+                                                            <strong>
+                                                                Visit Type :
+                                                            </strong>
+                                                            <field name="visit_type"/>
+                                                            <br/>
+                                                            <strong>
+                                                                Visit Time :
+                                                            </strong>
+                                                            <field name="visit_time"/>
+                                                        </div>
+                                                        <div style="background-color: rgb(255 255 255 / 90%) !important;">
+                                                            <center>
+                                                                <button name="action_visit"
+                                                                        class="btn btn-outline-dark"
+                                                                        string="Visit" type="object"
+                                                                        style="width:200px;height:30px;margin-bottom:9px;">
+                                                                    Take a Look
+                                                                </button>
+                                                            </center>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+                            <page string="Hotel">
+                                <field name="hotel_ids">
+                                    <kanban>
+                                        <field name="id"/>
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div class="oe_kanban_global_click border-0"
+                                                     style="width:210px;height:365px;font-size:12px;">
+                                                    <div class="card" style="width:230px;">
+                                                        <img alt="Avtar"
+                                                             t-att-src="kanban_image('tour.hotel','image',record.id.raw_value)"
+                                                             style="width:227px;height:200px"/>
+                                                        <div class="card-body"
+                                                             style="width:228px;height:110px;background-color: rgb(255 255 255 / 90%) !important;">
+                                                            <h6 class="card-title">
+                                                                <field name="name"/>
+                                                            </h6>
+                                                            <strong>
+                                                                Contact :
+                                                            </strong>
+                                                            <field name="phone"/>
+                                                            <br/>
+                                                            <strong>
+                                                                Website :
+                                                            </strong>
+                                                            <field name="website"/>
+                                                        </div>
+                                                        <div style="background-color: rgb(255 255 255 / 90%) !important;">
+                                                            <center>
+                                                                <button name="action_visit" class="btn btn-outline-dark"
+                                                                        string="Visit" type="object"
+                                                                        style="width:200px;height:30px;margin-bottom:9px;">Visit
+                                                                </button>
+                                                            </center>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tour_location_tree_view" model="ir.ui.view">
+            <field name="name">tour.location.tree.view</field>
+            <field name="model">tour.location</field>
+            <field name="arch" type="xml">
+                <tree string="Location">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tour_location_search_view" model="ir.ui.view">
+            <field name="name">tour.location.search.view</field>
+            <field name="model">tour.location</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="tour_location_action" model="ir.actions.act_window">
+            <field name="name">Tour Location</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tour.location</field>
+            <field name="view_mode">tree,form,search</field>
+        </record>
+
+    </data>
+</odoo>
